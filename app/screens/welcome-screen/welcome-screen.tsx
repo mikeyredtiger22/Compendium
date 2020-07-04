@@ -83,7 +83,6 @@ export const WelcomeScreen: Component = observer(function WelcomeScreen() {
     <View style={FULL}>
       <Wallpaper />
       <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
-        <Header headerTx="welcomeScreen.poweredBy" style={HEADER} titleStyle={HEADER_TITLE} />
         <Text style={TITLE_WRAPPER}>
           <Text style={TITLE} text="Your new app, " />
           <Text style={ALMOST} text="almost" />

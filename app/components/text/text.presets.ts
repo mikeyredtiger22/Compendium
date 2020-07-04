@@ -27,11 +27,6 @@ export const presets = {
   bold: { ...BASE, fontWeight: "bold" } as TextStyle,
 
   /**
-   * Large headers.
-   */
-  header: { ...BASE, fontSize: 24, fontWeight: "bold" } as TextStyle,
-
-  /**
    * Field labels that appear on forms above the inputs.
    */
   fieldLabel: { ...BASE, fontSize: 13, color: color.dim } as TextStyle,

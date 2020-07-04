@@ -27,12 +27,7 @@ const Stack = createStackNavigator<RootParamList>()
 
 const RootStack = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        gestureEnabled: true,
-      }}
-    >
+    <Stack.Navigator>
       <Stack.Screen
         name="primaryStack"
         component={PrimaryNavigator}
