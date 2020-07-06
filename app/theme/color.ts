@@ -21,6 +21,10 @@ export const color = {
    */
   transparent: "rgba(0, 0, 0, 0)",
   /**
+   * Makes the background color slightly darker.
+   */
+  transparentDarker: "rgba(0, 0, 0, 0.2)",
+  /**
    * The screen background.
    */
   background: palette.white,
@@ -39,7 +43,7 @@ export const color = {
   /**
    * The default color of text in many components.
    */
-  text: palette.white,
+  text: palette.black,
   /**
    * Secondary information.
    */

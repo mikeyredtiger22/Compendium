@@ -1,10 +1,10 @@
 import React from "react"
-import { Image } from "react-native"
+import { View } from "react-native"
 import { presets } from "./wallpaper.presets"
 import { WallpaperProps } from "./wallpaper.props"
+import { color } from "../../theme"
 
-const defaultImage = require("./bg.png")
-
+const defaultColor = color.palette.white
 /**
  * For your text displaying needs.
  *
@@ -12,14 +12,15 @@ const defaultImage = require("./bg.png")
  */
 export function Wallpaper(props: WallpaperProps) {
   // grab the props
-  const { preset = "stretch", style: styleOverride, backgroundImage } = props
+  const { preset = "stretch", style: styleOverride, backgroundImage, color } = props
 
   // assemble the style
   const presetToUse = presets[preset] || presets.stretch
-  const style = { ...presetToUse, ...styleOverride }
+  const style = { ...presetToUse, backgroundColor: color || defaultColor, ...styleOverride }
 
   // figure out which image to use
-  const source = backgroundImage || defaultImage
+  // const source = backgroundImage || defaultImage
 
-  return <Image source={source} style={style} />
+  // return <Image source={source} style={style} />
+  return <View style={style} />
 }

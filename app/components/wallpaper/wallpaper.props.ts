@@ -13,6 +13,11 @@ export interface WallpaperProps {
   backgroundImage?: string
 
   /**
+   * An optional background color to override the default color.
+   */
+  color?: string
+
+  /**
    * One of the different types of wallpaper presets.
    */
   preset?: WallpaperPresets

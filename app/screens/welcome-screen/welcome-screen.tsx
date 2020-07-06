@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
 import { Button, Header, Screen, Text, Wallpaper } from "../../components"
 import { color, spacing, typography } from "../../theme"
-const bowserLogo = require("./bowser.png")
 
 const FULL: ViewStyle = { flex: 1 }
 const CONTAINER: ViewStyle = {
@@ -16,19 +15,6 @@ const TEXT: TextStyle = {
   fontFamily: typography.primary,
 }
 const BOLD: TextStyle = { fontWeight: "bold" }
-const HEADER: TextStyle = {
-  paddingTop: spacing[3],
-  paddingBottom: spacing[4] + spacing[1],
-  paddingHorizontal: 0,
-}
-const HEADER_TITLE: TextStyle = {
-  ...TEXT,
-  ...BOLD,
-  fontSize: 12,
-  lineHeight: 15,
-  textAlign: "center",
-  letterSpacing: 1.5,
-}
 const TITLE_WRAPPER: TextStyle = {
   ...TEXT,
   textAlign: "center",
@@ -46,14 +32,9 @@ const ALMOST: TextStyle = {
   fontSize: 26,
   fontStyle: "italic",
 }
-const BOWSER: ImageStyle = {
-  alignSelf: "center",
-  marginVertical: spacing[5],
-  maxWidth: "100%",
-}
 const CONTENT: TextStyle = {
   ...TEXT,
-  color: "#BAB6C8",
+  color: color.palette.darkBlue,
   fontSize: 15,
   lineHeight: 22,
   marginBottom: spacing[5],
@@ -61,15 +42,16 @@ const CONTENT: TextStyle = {
 const CONTINUE: ViewStyle = {
   paddingVertical: spacing[4],
   paddingHorizontal: spacing[4],
-  backgroundColor: "#5D2555",
+  backgroundColor: color.palette.yellow,
 }
 const CONTINUE_TEXT: TextStyle = {
   ...TEXT,
+  color: color.palette.darkBlue,
   ...BOLD,
   fontSize: 13,
   letterSpacing: 2,
 }
-const FOOTER: ViewStyle = { backgroundColor: "#20162D" }
+const FOOTER: ViewStyle = { backgroundColor: color.palette.darkBlue }
 const FOOTER_CONTENT: ViewStyle = {
   paddingVertical: spacing[4],
   paddingHorizontal: spacing[4],
@@ -81,15 +63,14 @@ export const WelcomeScreen: Component = observer(function WelcomeScreen() {
 
   return (
     <View style={FULL}>
-      <Wallpaper />
+      {/*<Wallpaper />*/}
       <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
         <Text style={TITLE_WRAPPER}>
           <Text style={TITLE} text="Your new app, " />
           <Text style={ALMOST} text="almost" />
-          <Text style={TITLE} text="!" />
+          <Text style={TITLE} text="! 5" />
         </Text>
         <Text style={TITLE} preset="header" tx="welcomeScreen.readyForLaunch" />
-        <Image source={bowserLogo} style={BOWSER} />
         <Text style={CONTENT}>
           This probably isn't what your app is going to look like. Unless your designer handed you
           this screen and, in that case, congrats! You're ready to ship.
