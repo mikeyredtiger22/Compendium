@@ -12,13 +12,14 @@ import { mergeAll, flatten } from "ramda"
  */
 export function Text(props: TextProps) {
   // grab the props
-  const { preset = "default", tx, txOptions, text, children, style: styleOverride, ...rest } = props
+  const { preset = "default", tx, txOptions, text, children, style: styleOverride, capitalise, ...rest } = props
 
   // figure out which content to use
   const i18nText = tx && translate(tx, txOptions)
   const content = i18nText || text || children
+  const caseStyle = capitalise ? { textTransform: 'uppercase' }: {}
 
-  const style = mergeAll(flatten([presets[preset] || presets.default, styleOverride]))
+  const style = mergeAll(flatten([presets[preset] || presets.default, caseStyle, styleOverride]))
 
   return (
     <ReactNativeText {...rest} style={style}>

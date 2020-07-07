@@ -6,6 +6,7 @@ export interface TextProps extends TextProperties {
    * Children components.
    */
   children?: React.ReactNode
+  capitalise?: boolean,
 
   /**
    * Text which is looked up via i18n.
