@@ -8,13 +8,15 @@ import React from "react"
 import { NavigationContainer, NavigationContainerRef } from "@react-navigation/native"
 import { TabsNavigator } from "./tabs-navigator"
 import { createDrawerNavigator } from "@react-navigation/drawer"
+import { CustomDrawerContentComponent } from "../components/CustomDrawerContentComponent/CustomDrawerContentComponent"
 
 const Drawer = createDrawerNavigator();
 
 const RootDrawerNavigator = () => {
   return (
-    <Drawer.Navigator initialRouteName="tabsNavigator">
-      <Drawer.Screen name="tabsNavigator" component={TabsNavigator} />
+    <Drawer.Navigator initialRouteName="Home" drawerPosition={"right"} drawerContent={CustomDrawerContentComponent}>
+      <Drawer.Screen name="Home" component={TabsNavigator} />
+      <Drawer.Screen name="Settings" component={TabsNavigator} />
     </Drawer.Navigator>
   )
 }

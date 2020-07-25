@@ -37,6 +37,7 @@ const styles = {
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 0.5,
+    elevation: 15,
     shadowColor: "rgba(0, 0, 0, 0.15)",
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 1,
@@ -44,12 +45,14 @@ const styles = {
   } as ViewStyle,
   IMAGE: {
     alignSelf: "center",
-    width: screenWidth - 172,
+    width: screenWidth - 170,
     height: 100,
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
   } as ImageStyle,
   TEXT_CONTAINER: {
+    borderRadius: 8,
+    backgroundColor: "#f3f3f3",
     overflow: "hidden",
     padding: spacing[4],
   } as ViewStyle

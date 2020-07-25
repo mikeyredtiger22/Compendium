@@ -4,11 +4,14 @@
  *
  * You'll likely spend most of your time in this file.
  */
-import React from "react"
-import { WelcomeScreen, DemoScreen, ContentScreen, GridScreen, FormScreen } from "../screens"
+import React, { Component, FunctionComponent } from "react"
+import { ContentScreen, DemoScreen, FormScreen, GridScreen, WelcomeScreen } from "../screens"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5 } from "@expo/vector-icons"
 import { color } from "../theme"
+import { createStackNavigator } from "@react-navigation/stack"
+import { Button } from "../components"
+import { ViewStyle } from "react-native"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -40,7 +43,7 @@ const Tab = createBottomTabNavigator<PrimaryParamList>()
 //   }
 // };
 
-export function TabsNavigator() {
+export function TabsNavigator(props) {
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -52,13 +55,39 @@ export function TabsNavigator() {
         },
       })}
     >
-      <Tab.Screen name="Content" component={ContentScreen} />
+      <Tab.Screen name="Content" component={getStackScreen('Content', ContentScreen, props.navigation)} />
       <Tab.Screen name="Grid" component={GridScreen} />
       <Tab.Screen name="Form" component={FormScreen} />
       <Tab.Screen name="Map" component={WelcomeScreen} />
       <Tab.Screen name="Website" component={DemoScreen} />
     </Tab.Navigator>
   )
+}
+
+const Stack = createStackNavigator();
+
+function getStackScreen(title: string, component: FunctionComponent, navigation) {
+  return function() {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerRight: () => drawerOpenIcon(navigation),
+          headerStyle: {
+            backgroundColor: color.palette.darkBlue,
+          },
+          headerTintColor: color.palette.white,
+          headerTitleStyle: {
+            fontSize: 25,
+          },
+        }}>
+        <Stack.Screen
+          name={title}
+          component={component}
+          options={{ title }}
+        />
+      </Stack.Navigator>
+    )
+  }
 }
 
 const getTabIcon = (screenName: string) => {
@@ -76,6 +105,18 @@ const getTabIcon = (screenName: string) => {
     default:
       return 'times-circle'
   }
+}
+const drawerOpenIcon = (navigation) => {
+  return (
+    <Button style={OPEN_DRAWER_BUTTON} onPress={() => navigation.openDrawer()}>
+      <FontAwesome5 name='bars' color={color.palette.white} size={20}/>
+    </Button>
+  )
+}
+
+const OPEN_DRAWER_BUTTON: ViewStyle = {
+  paddingHorizontal: 15,
+  backgroundColor: 'transparent'
 }
 
 /**
