@@ -5,9 +5,7 @@
  * You'll likely spend most of your time in this file.
  */
 import React from "react"
-import { createStackNavigator } from "@react-navigation/stack"
 import { WelcomeScreen, DemoScreen, ContentScreen, GridScreen, FormScreen } from "../screens"
-import { palette } from "../theme/palette"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { FontAwesome5 } from '@expo/vector-icons';
 import { color } from "../theme"
@@ -25,21 +23,22 @@ import { color } from "../theme"
  *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
  */
 export type PrimaryParamList = {
-
-
-  welcome: undefined
-  demo: undefined
+  Content: undefined,
+  Grid: undefined,
+  Form: undefined,
+  Map: undefined,
+  Website: undefined,
 }
 
 const Tab = createBottomTabNavigator<PrimaryParamList>()
 
-const defaultNavOptions={
-  title: 'My home',
-  headerTintColor: palette.darkBlue,
-  headerStyle: {
-    backgroundColor: palette.yellow,
-  }
-};
+// const defaultNavOptions={
+//   title: 'My home',
+//   headerTintColor: palette.darkBlue,
+//   headerStyle: {
+//     backgroundColor: palette.yellow,
+//   }
+// };
 
 export function TabsNavigator() {
   return (
