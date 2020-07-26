@@ -1,8 +1,9 @@
 import * as React from "react"
 import { Dimensions, Image, ImageStyle, View, ViewStyle } from "react-native"
 import { spacing } from "../../theme"
-import { Text } from ".."
+import { Button, Text } from ".."
 import { Article } from "../../models/article/article"
+import { useNavigation } from "@react-navigation/native"
 
 const landscape1 = require('../../../assets/landscapes/landscape1.jpg');
 
@@ -20,14 +21,16 @@ const screenWidth = Math.round(Dimensions.get('window').width);
  */
 export function ContentCard(props: ContentCardProps) {
   const { item } = props;
+  const navigation = useNavigation()
+  const openArticle = () => navigation.navigate("ArticleDetail", { item })
   return (
-    <View style={styles.ROOT}>
+    <Button preset={"blank"} style={styles.ROOT} onPress={openArticle}>
       <Image source={landscape1} style={styles.IMAGE} />
       <View style={styles.TEXT_CONTAINER}>
         <Text preset={"cardHeader"} numberOfLines={2} capitalise>{item.title}</Text>
         <Text preset={"thin"}>{item.content}</Text>
       </View>
-    </View>
+    </Button>
   )
 }
 

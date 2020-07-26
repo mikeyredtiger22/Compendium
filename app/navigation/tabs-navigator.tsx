@@ -5,13 +5,14 @@
  * You'll likely spend most of your time in this file.
  */
 import React, { FunctionComponent } from "react"
-import { ContentScreen, DemoScreen, FormScreen, GridScreen, WelcomeScreen } from "../screens"
+import { ArticleDetailScreen, ContentScreen, DemoScreen, FormScreen, GridScreen, WelcomeScreen } from "../screens"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { FontAwesome5 } from "@expo/vector-icons"
 import { color } from "../theme"
 import { createStackNavigator } from "@react-navigation/stack"
 import { Button } from "../components"
 import { ViewStyle } from "react-native"
+import { Article } from "../models/article/article"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -31,6 +32,9 @@ export type PrimaryParamList = {
   Form: undefined,
   Map: undefined,
   Website: undefined,
+  ArticleDetail: {
+    item: Article
+  }
 }
 
 const Tab = createBottomTabNavigator<PrimaryParamList>()
@@ -56,10 +60,10 @@ export function TabsNavigator(props) {
       })}
     >
       <Tab.Screen name="Content" component={getStackScreen('Content', ContentScreen, props.navigation)} />
-      <Tab.Screen name="Grid" component={GridScreen} />
-      <Tab.Screen name="Form" component={FormScreen} />
-      <Tab.Screen name="Map" component={WelcomeScreen} />
-      <Tab.Screen name="Website" component={DemoScreen} />
+      <Tab.Screen name="Grid" component={getStackScreen('Grid', GridScreen, props.navigation)} />
+      <Tab.Screen name="Form" component={getStackScreen('Form', FormScreen, props.navigation)} />
+      <Tab.Screen name="Map" component={getStackScreen('Map', WelcomeScreen, props.navigation)} />
+      <Tab.Screen name="Website" component={getStackScreen('Website', DemoScreen, props.navigation)} />
     </Tab.Navigator>
   )
 }
@@ -84,6 +88,11 @@ function getStackScreen(title: string, component: FunctionComponent, navigation)
           name={title}
           component={component}
           options={{ title }}
+        />
+        <Stack.Screen
+          name={'ArticleDetail'}
+          component={ArticleDetailScreen}
+          options={{ title: 'sup' }}
         />
       </Stack.Navigator>
     )

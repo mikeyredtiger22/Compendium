@@ -3,11 +3,7 @@ import { observer } from "mobx-react-lite"
 import { ViewStyle } from "react-native"
 import { Screen, Text } from "../components"
 // import { useNavigation } from "@react-navigation/native"
-import { color } from "../theme"
 
-const ROOT: ViewStyle = {
-  backgroundColor: color.palette.black,
-}
 
 export const FormScreen: Component = observer(function FormScreen() {
 
@@ -15,7 +11,10 @@ export const FormScreen: Component = observer(function FormScreen() {
   // const navigation = useNavigation()
   return (
     <Screen style={ROOT} preset="scroll">
-      <Text preset="header" tx="formScreen.header" />
+      <Text preset="screenTitle" text="Form"/>
     </Screen>
   )
 })
+
+const ROOT: ViewStyle = {
+}

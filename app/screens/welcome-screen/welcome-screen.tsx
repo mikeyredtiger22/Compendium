@@ -1,8 +1,8 @@
 import React, { FunctionComponent as Component } from "react"
-import { View, Image, ViewStyle, TextStyle, ImageStyle, SafeAreaView } from "react-native"
+import { SafeAreaView, TextStyle, View, ViewStyle } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
-import { Button, Header, Screen, Text, Wallpaper } from "../../components"
+import { Button, Screen, Text } from "../../components"
 import { color, spacing, typography } from "../../theme"
 
 const FULL: ViewStyle = { flex: 1 }
@@ -70,7 +70,7 @@ export const WelcomeScreen: Component = observer(function WelcomeScreen() {
           <Text style={ALMOST} text="almost" />
           <Text style={TITLE} text="! 5" />
         </Text>
-        <Text style={TITLE} preset="header" tx="welcomeScreen.readyForLaunch" />
+        <Text style={TITLE} tx="welcomeScreen.readyForLaunch" />
         <Text style={CONTENT}>
           This probably isn't what your app is going to look like. Unless your designer handed you
           this screen and, in that case, congrats! You're ready to ship.

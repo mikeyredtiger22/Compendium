@@ -4,10 +4,8 @@ import { ViewStyle } from "react-native"
 import { Screen, Text } from "../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
-import { color } from "../theme"
 
 const ROOT: ViewStyle = {
-  backgroundColor: color.palette.black,
 }
 
 export const GridScreen: Component = observer(function GridScreen() {
@@ -20,7 +18,7 @@ export const GridScreen: Component = observer(function GridScreen() {
   // const navigation = useNavigation()
   return (
     <Screen style={ROOT} preset="scroll">
-      <Text tx="gridScreen.header" />
+      <Text preset="screenTitle" text="Grid"/>
     </Screen>
   )
 })

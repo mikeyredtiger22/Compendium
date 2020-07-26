@@ -39,7 +39,7 @@ storiesOf("Text", module)
       </UseCase>
       <UseCase text="header" usage="Used for major section headers.">
         <View style={VIEWSTYLE}>
-          <Text preset="header">Behold!</Text>
+          <Text>Behold!</Text>
         </View>
       </UseCase>
     </Story>

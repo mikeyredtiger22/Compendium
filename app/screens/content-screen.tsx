@@ -1,6 +1,6 @@
 import React, { FunctionComponent as Component, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { Dimensions, TextStyle, View, ViewStyle } from "react-native"
+import { Dimensions, View, ViewStyle } from "react-native"
 import { ContentCard, Screen, Text } from "../components"
 import Carousel, { Pagination } from "react-native-snap-carousel"
 import { color, spacing } from "../theme"
@@ -22,7 +22,7 @@ export const ContentScreen: Component = observer(function ContentScreen() {
 
   return (
     <Screen style={ROOT} preset="scroll">
-      <Text preset="screenTitle" text="Content Screen" style={HEADER} />
+      <Text preset="screenTitle" text="Content Screen"/>
       <View style={CAROUSEL_CONTAINER}>
         <Carousel
           ref={carouselRef}
@@ -57,9 +57,6 @@ const CAROUSEL_CONTAINER: ViewStyle = {
   paddingBottom: spacing[2],
   borderBottomWidth: 1,
   borderBottomColor: color.palette.lighterGrey,
-}
-const HEADER: TextStyle = {
-  paddingLeft: spacing[3]
 }
 const DRAWER_PAGINATION_DOT: ViewStyle = {
   width: 10,

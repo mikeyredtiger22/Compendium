@@ -4,10 +4,8 @@ import { ViewStyle } from "react-native"
 import { Screen, Text } from "../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
-import { color } from "../theme"
 
 const ROOT: ViewStyle = {
-  backgroundColor: color.palette.black,
 }
 
 export const SettingsScreen: Component = observer(function SettingsScreen() {
@@ -20,7 +18,7 @@ export const SettingsScreen: Component = observer(function SettingsScreen() {
   // const navigation = useNavigation()
   return (
     <Screen style={ROOT} preset="scroll">
-      <Text tx="settingsScreen.header" />
+      <Text preset="screenTitle" text="Settings"/>
     </Screen>
   )
 })

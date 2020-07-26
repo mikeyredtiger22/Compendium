@@ -21,7 +21,7 @@ export const presets = {
    */
   default: BASE,
 
-  screenTitle: {...BASE, fontSize: 35 } as TextStyle,
+  screenTitle: {...BASE, fontSize: 35, paddingVertical: 10, paddingHorizontal: 20 } as TextStyle,
   cardHeader: {...BASE, fontSize: 16, letterSpacing: 0.8, paddingBottom: spacing[1] } as TextStyle,
   thin: {...BASE, fontFamily: typography.museo, fontSize: 15 } as TextStyle,
   /**
