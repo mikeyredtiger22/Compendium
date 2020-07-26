@@ -1,13 +1,20 @@
 import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree"
-import { ArticleModel } from ".."
+import { ArticleModel } from "../article/article"
+
+// const articleData = require("./articleData.json")
 
 /**
  * A RootStore model.
  */
 //prettier-ignore
 export const RootStoreModel = types.model("RootStore").props({
-  // articles: types.array(ArticleModel)
+  articles: types.array(ArticleModel)
 })
+// .actions(self => ({ // todo mpf add mock article JSON data
+//   afterCreate() {
+//     self.articles = articleData.articles
+//   },
+// }))
 
 /**
  * The RootStore instance.
@@ -19,10 +26,10 @@ export interface RootStore extends Instance<typeof RootStoreModel> {}
  */
 export interface RootStoreSnapshot extends SnapshotOut<typeof RootStoreModel> {}
 
-export const initalRootStoreState: SnapshotIn<typeof RootStoreModel> = {
+export const initialRootStoreState: SnapshotIn<typeof RootStoreModel> = {
   articles: [
-    {title: "Article 1", content: "123.."},
-    {title: "Article 2", content: "123.."},
-    {title: "Article 3", content: "123.."},
+    {title: "Article 1: Stunning Landscape Images", content: "Press for more info"},
+    {title: "Article 2: Stunning Landscape Images", content: "Press for more info"},
+    {title: "Article 3: Stunning Landscape Images", content: "Press for more info"},
   ]
 }

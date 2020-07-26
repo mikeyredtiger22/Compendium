@@ -4,15 +4,17 @@ import { Dimensions, TextStyle, View, ViewStyle } from "react-native"
 import { ContentCard, Screen, Text } from "../components"
 import Carousel, { Pagination } from "react-native-snap-carousel"
 import { color, spacing } from "../theme"
+import { RootStore, useStores } from "../models"
+import { Article } from "../models/article/article"
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 export const ContentScreen: Component = observer(function ContentScreen() {
-  const mockData = [1, 2, 3, 4, 5, 6, 7];
   const [carouselIndex, setCarouselIndex] = useState(0);
   const carouselRef = useRef(null);
+  const { articles }: RootStore = useStores();
 
-  const _renderItem = (...props) => {
+  const _renderItem = (props: { item: Article, index: number }) => {
     return (
       <ContentCard {...props} />
     );
@@ -25,14 +27,14 @@ export const ContentScreen: Component = observer(function ContentScreen() {
         <Carousel
           ref={carouselRef}
           layout={'default'}
-          data={mockData}
+          data={articles}
           renderItem={_renderItem}
           sliderWidth={screenWidth}
           itemWidth={screenWidth - 150}
           onBeforeSnapToItem={index => setCarouselIndex(index)}
         />
         <Pagination
-          dotsLength={mockData.length}
+          dotsLength={articles.length}
           activeDotIndex={carouselIndex}
           dotStyle={DRAWER_PAGINATION_DOT}
           containerStyle={DRAWER_PAGINATION_CONTAINER}

@@ -15,12 +15,12 @@ export const WebsiteScreen: Component = observer(function WebsiteScreen() {
   // const { someStore, anotherStore } = useStores()
   // OR
   // const rootStore = useStores()
-  
+
   // Pull in navigation via hook
   // const navigation = useNavigation()
   return (
     <Screen style={ROOT} preset="scroll">
-      <Text preset="header" tx="websiteScreen.header" />
+      <Text tx="websiteScreen.header" />
     </Screen>
   )
 })

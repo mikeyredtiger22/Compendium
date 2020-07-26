@@ -8,7 +8,13 @@ export const ArticleModel = types
   .props({
     title: types.string,
     content: types.string,
+    favourited: false,
   })
+  .actions(self => ({
+    toggleFavourited() {
+      self.favourited = !self.favourited
+    },
+  }))
   // .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   // .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 

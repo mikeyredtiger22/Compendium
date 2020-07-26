@@ -2,10 +2,13 @@ import * as React from "react"
 import { Dimensions, Image, ImageStyle, View, ViewStyle } from "react-native"
 import { spacing } from "../../theme"
 import { Text } from ".."
+import { Article } from "../../models/article/article"
 
 const landscape1 = require('../../../assets/landscapes/landscape1.jpg');
 
 export interface ContentCardProps {
+  item: Article
+  index: number
 }
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -16,13 +19,13 @@ const screenWidth = Math.round(Dimensions.get('window').width);
  * Component description here for TypeScript tips.
  */
 export function ContentCard(props: ContentCardProps) {
-  // console.log('mpf props: ', props);
+  const { item } = props;
   return (
     <View style={styles.ROOT}>
       <Image source={landscape1} style={styles.IMAGE} />
       <View style={styles.TEXT_CONTAINER}>
-        <Text preset={"cardHeader"} numberOfLines={2} capitalise>Stunning Landscape Images</Text>
-        <Text preset={"thin"}>Press for more info</Text>
+        <Text preset={"cardHeader"} numberOfLines={2} capitalise>{item.title}</Text>
+        <Text preset={"thin"}>{item.content}</Text>
       </View>
     </View>
   )

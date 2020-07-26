@@ -15,12 +15,12 @@ export const GridScreen: Component = observer(function GridScreen() {
   // const { someStore, anotherStore } = useStores()
   // OR
   // const rootStore = useStores()
-  
+
   // Pull in navigation via hook
   // const navigation = useNavigation()
   return (
     <Screen style={ROOT} preset="scroll">
-      <Text preset="header" tx="gridScreen.header" />
+      <Text tx="gridScreen.header" />
     </Screen>
   )
 })
