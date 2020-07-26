@@ -12,7 +12,7 @@ const defaultColor = color.palette.white
  */
 export function Wallpaper(props: WallpaperProps) {
   // grab the props
-  const { preset = "stretch", style: styleOverride, backgroundImage, color } = props
+  const { preset = "stretch", style: styleOverride, color } = props
 
   // assemble the style
   const presetToUse = presets[preset] || presets.stretch

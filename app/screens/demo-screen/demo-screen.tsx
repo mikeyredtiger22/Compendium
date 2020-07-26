@@ -1,8 +1,7 @@
 import React, { FunctionComponent as Component } from "react"
 import { Image, ImageStyle, Platform, TextStyle, View, ViewStyle } from "react-native"
-import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
-import { BulletItem, Button, Header, Text, Screen, Wallpaper } from "../../components"
+import { BulletItem, Button, Text, Screen, Wallpaper } from "../../components"
 import { color, spacing } from "../../theme"
 import { Api } from "../../services/api"
 import { save } from "../../utils/storage"
@@ -67,9 +66,6 @@ const HINT: TextStyle = {
 }
 
 export const DemoScreen: Component = observer(function DemoScreen() {
-  const navigation = useNavigation()
-  const goBack = () => navigation.goBack()
-
   const demoReactotron = React.useMemo(
     () => async () => {
       console.tron.log("Your Friendly tron log message")
@@ -114,7 +110,7 @@ export const DemoScreen: Component = observer(function DemoScreen() {
     <View style={FULL}>
       <Wallpaper />
       <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
-        <Text style={TITLE} preset="header" tx="demoScreen.title" />
+        <Text style={TITLE} tx="demoScreen.title" />
         <Text style={TAGLINE} tx="demoScreen.tagLine" />
         <BulletItem text="Load up Reactotron!  You can inspect your app, view the events, interact, and so much more!" />
         <BulletItem text="Integrated here, Navigation with State, TypeScript, Storybook, Solidarity, and i18n." />

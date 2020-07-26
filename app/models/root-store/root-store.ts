@@ -31,5 +31,7 @@ export const initialRootStoreState: SnapshotIn<typeof RootStoreModel> = {
     {title: "Article 1: Stunning Landscape Images", content: "Press for more info"},
     {title: "Article 2: Stunning Landscape Images", content: "Press for more info"},
     {title: "Article 3: Stunning Landscape Images", content: "Press for more info"},
+    {title: "Article 4: Stunning Landscape Images", content: "Press for more info"},
+    {title: "Article 5: Stunning Landscape Images", content: "Press for more info"},
   ]
 }

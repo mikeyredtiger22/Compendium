@@ -15,12 +15,12 @@ export const SettingsScreen: Component = observer(function SettingsScreen() {
   // const { someStore, anotherStore } = useStores()
   // OR
   // const rootStore = useStores()
-  
+
   // Pull in navigation via hook
   // const navigation = useNavigation()
   return (
     <Screen style={ROOT} preset="scroll">
-      <Text preset="header" tx="settingsScreen.header" />
+      <Text tx="settingsScreen.header" />
     </Screen>
   )
 })

@@ -6,11 +6,17 @@ import { ContentCard } from "./content-card"
 declare var module
 
 storiesOf("ContentCard", module)
-  .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)
-  .add("Style Presets", () => (
-    <Story>
-      <UseCase text="Primary" usage="The primary.">
-        <ContentCard text="ContentCard" />
-      </UseCase>
-    </Story>
-  ))
+.addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)
+.add("Style Presets", () => (
+  <Story>
+    <UseCase text="Primary" usage="The primary.">
+      <ContentCard index={0} item={{
+        title: "Mock title",
+        content: "Mock content",
+        favourited: false,
+        toggleFavourited: () => {
+        },
+      }}/>
+    </UseCase>
+  </Story>
+))
