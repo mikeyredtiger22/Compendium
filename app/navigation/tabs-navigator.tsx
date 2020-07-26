@@ -4,7 +4,7 @@
  *
  * You'll likely spend most of your time in this file.
  */
-import React, { Component, FunctionComponent } from "react"
+import React, { FunctionComponent } from "react"
 import { ContentScreen, DemoScreen, FormScreen, GridScreen, WelcomeScreen } from "../screens"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { FontAwesome5 } from "@expo/vector-icons"

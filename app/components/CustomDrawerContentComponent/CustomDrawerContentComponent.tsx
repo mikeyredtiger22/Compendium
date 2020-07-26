@@ -42,6 +42,8 @@ const DRAWER_HEADER: ViewStyle = {
 }
 const DRAWER_HEADER_IMAGE: ImageStyle = {
   height: 200,
+  width: '100%',
+  // aspectRatio: 1
 }
 const DRAWER_CONTAINER_STYLE: ViewStyle = {
   flex: 1,
