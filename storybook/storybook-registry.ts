@@ -1,3 +1,4 @@
+require("../app/components/grid-card/grid-card.story")
 require("../app/components/carousel/carousel.story")
 require("../app/components/content-card/content-card.story")
 require("../app/components/text/text.story")
