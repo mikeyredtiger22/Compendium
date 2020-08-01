@@ -12,7 +12,6 @@ import {
 import { TabsNavigator } from "./tabs-navigator";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { CustomDrawerContentComponent } from "../components/CustomDrawerContentComponent/CustomDrawerContentComponent";
-console.disableYellowBox = true;
 const Drawer = createDrawerNavigator();
 
 const RootDrawerNavigator = () => {

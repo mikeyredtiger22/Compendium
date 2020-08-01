@@ -8,10 +8,10 @@ import React, { FunctionComponent } from "react";
 import {
   ArticleDetailScreen,
   ContentScreen,
-  DemoScreen,
   FormScreen,
   GridScreen,
-  WelcomeScreen,
+  MapScreen,
+  WebsiteScreen,
 } from "../screens";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as Icons from "@expo/vector-icons";
@@ -80,11 +80,11 @@ export function TabsNavigator(props) {
       />
       <Tab.Screen
         name="Map"
-        component={getStackScreen("Map", WelcomeScreen, props.navigation)}
+        component={getStackScreen("Map", MapScreen, props.navigation)}
       />
       <Tab.Screen
         name="Website"
-        component={getStackScreen("Website", DemoScreen, props.navigation)}
+        component={getStackScreen("Website", WebsiteScreen, props.navigation)}
       />
     </Tab.Navigator>
   );

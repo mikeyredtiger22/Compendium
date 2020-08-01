@@ -4,8 +4,4 @@
  */
 import { YellowBox } from "react-native";
 
-YellowBox.ignoreWarnings([
-  "componentWillMount is deprecated",
-  "componentWillReceiveProps is deprecated",
-  "Require cycle:",
-]);
+YellowBox.ignoreWarnings([]);
