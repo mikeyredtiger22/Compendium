@@ -1,34 +1,35 @@
-import React, { FunctionComponent as Component, useRef, useState } from "react"
-import { Dimensions, ViewStyle } from "react-native"
-import { ContentCard } from "../"
-import * as SnapCarousel  from "react-native-snap-carousel"
-import { useObserver } from "mobx-react-lite"
-import { Article } from "../../models/article/article"
-import { color } from "../../theme"
-import { AdditionalParallaxProps } from "react-native-snap-carousel"
+import React, { FunctionComponent as Component, useRef, useState } from "react";
+import { Dimensions, ViewStyle } from "react-native";
+import { ContentCard } from "../";
+import * as SnapCarousel from "react-native-snap-carousel";
+import { useObserver } from "mobx-react-lite";
+import { Article } from "../../models/article/article";
+import { color } from "../../theme";
+import { AdditionalParallaxProps } from "react-native-snap-carousel";
 
 export interface CarouselProps {
-  data: Array<any>,
-  renderItem?: (item: { item: any; index: number }, parallaxProps?: AdditionalParallaxProps) => React.ReactNode
+  data: Array<any>;
+  renderItem?: (
+    item: { item: any; index: number },
+    parallaxProps?: AdditionalParallaxProps,
+  ) => React.ReactNode;
 }
 
-const screenWidth = Math.round(Dimensions.get('window').width);
+const screenWidth = Math.round(Dimensions.get("window").width);
 
 export const Carousel: Component<CarouselProps> = props => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const carouselRef = useRef(null);
 
-  const _defaultRenderItem = (props: { item: Article, index: number }) => {
-    return (
-      <ContentCard {...props} />
-    );
-  }
+  const _defaultRenderItem = (props: { item: Article; index: number }) => {
+    return <ContentCard {...props} />;
+  };
 
   return useObserver(() => (
     <>
       <SnapCarousel.default
         ref={carouselRef}
-        layout={'default'}
+        layout={"default"}
         data={props.data}
         renderItem={props.renderItem || _defaultRenderItem}
         sliderWidth={screenWidth}
@@ -47,8 +48,8 @@ export const Carousel: Component<CarouselProps> = props => {
         carouselRef={carouselRef}
       />
     </>
-  ))
-}
+  ));
+};
 
 const DRAWER_PAGINATION_DOT: ViewStyle = {
   width: 10,
@@ -56,8 +57,8 @@ const DRAWER_PAGINATION_DOT: ViewStyle = {
   borderRadius: 5,
   marginHorizontal: 8,
   backgroundColor: color.palette.darkBlue,
-}
+};
 const DRAWER_PAGINATION_CONTAINER: ViewStyle = {
   paddingTop: 0,
   paddingBottom: 10,
-}
+};

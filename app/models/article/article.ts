@@ -1,4 +1,4 @@
-import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import { Instance, SnapshotOut, types } from "mobx-state-tree";
 
 /**
  * Model description here for TypeScript hints.
@@ -12,13 +12,13 @@ export const ArticleModel = types
   })
   .actions(self => ({
     toggleFavourited() {
-      self.favourited = !self.favourited
+      self.favourited = !self.favourited;
     },
-  }))
-  // .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
-  // .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
+  }));
+// .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
+// .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 
-  /**
+/**
   * Un-comment the following to omit model attributes from your snapshots (and from async storage).
   * Useful for sensitive data like passwords, or transitive state like whether a modal is open.
 
@@ -26,7 +26,7 @@ export const ArticleModel = types
   *  .postProcessSnapshot(omit(["password", "socialSecurityNumber", "creditCardNumber"]))
   */
 
-type ArticleType = Instance<typeof ArticleModel>
+type ArticleType = Instance<typeof ArticleModel>;
 export interface Article extends ArticleType {}
-type ArticleSnapshotType = SnapshotOut<typeof ArticleModel>
+type ArticleSnapshotType = SnapshotOut<typeof ArticleModel>;
 export interface ArticleSnapshot extends ArticleSnapshotType {}

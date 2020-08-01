@@ -1,18 +1,18 @@
-import * as React from "react"
-import { Dimensions, Image, ImageStyle, View, ViewStyle } from "react-native"
-import { spacing } from "../../theme"
-import { Button, Text } from ".."
-import { Article } from "../../models/article/article"
-import { useNavigation } from "@react-navigation/native"
+import * as React from "react";
+import { Dimensions, Image, ImageStyle, View, ViewStyle } from "react-native";
+import { spacing } from "../../theme";
+import { Button, Text } from "..";
+import { Article } from "../../models/article/article";
+import { useNavigation } from "@react-navigation/native";
 
-const landscape1 = require('../../../assets/landscapes/landscape1.jpg');
+const landscape1 = require("../../../assets/landscapes/landscape1.jpg");
 
 export interface ContentCardProps {
-  item: Article
-  index: number
+  item: Article;
+  index: number;
 }
 
-const screenWidth = Math.round(Dimensions.get('window').width);
+const screenWidth = Math.round(Dimensions.get("window").width);
 
 /**
  * Stateless functional component for your needs
@@ -21,17 +21,19 @@ const screenWidth = Math.round(Dimensions.get('window').width);
  */
 export function ContentCard(props: ContentCardProps) {
   const { item } = props;
-  const navigation = useNavigation()
-  const openArticle = () => navigation.navigate("ArticleDetail", { item })
+  const navigation = useNavigation();
+  const openArticle = () => navigation.navigate("ArticleDetail", { item });
   return (
     <Button preset={"blank"} style={styles.ROOT} onPress={openArticle}>
       <Image source={landscape1} style={styles.IMAGE} />
       <View style={styles.TEXT_CONTAINER}>
-        <Text preset={"cardHeader"} numberOfLines={2} capitalise>{item.title}</Text>
+        <Text preset={"cardHeader"} numberOfLines={2} capitalise>
+          {item.title}
+        </Text>
         <Text preset={"thin"}>{item.content}</Text>
       </View>
     </Button>
-  )
+  );
 }
 
 const styles = {
@@ -43,7 +45,7 @@ const styles = {
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 0.5,
-    elevation: 15,
+    elevation: 10,
     shadowColor: "rgba(0, 0, 0, 0.15)",
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 1,
@@ -61,5 +63,5 @@ const styles = {
     backgroundColor: "#f3f3f3",
     overflow: "hidden",
     padding: spacing[4],
-  } as ViewStyle
-}
+  } as ViewStyle,
+};

@@ -13,4 +13,4 @@ export const palette = {
   yellowDark: "#d6a900",
   yellow: "#ffc700",
   magenta: "#ff1050",
-}
+};

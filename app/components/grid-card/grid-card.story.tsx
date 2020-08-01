@@ -1,9 +1,9 @@
-import * as React from "react"
-import { storiesOf } from "@storybook/react-native"
-import { StoryScreen, Story, UseCase } from "../../../storybook/views"
-import { GridCard } from "./grid-card"
+import * as React from "react";
+import { storiesOf } from "@storybook/react-native";
+import { StoryScreen, Story, UseCase } from "../../../storybook/views";
+import { GridCard } from "./grid-card";
 
-declare var module
+declare let module;
 
 storiesOf("GridCard", module)
   .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)
@@ -13,4 +13,4 @@ storiesOf("GridCard", module)
         <GridCard text="GridCard" />
       </UseCase>
     </Story>
-  ))
+  ));

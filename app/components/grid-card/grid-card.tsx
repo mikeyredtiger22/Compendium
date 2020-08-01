@@ -1,27 +1,44 @@
-import * as React from "react"
-import { ImageBackground, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
-import { color, typography } from "../../theme"
-import { Button, Text } from ".."
+import * as React from "react";
+import {
+  ImageBackground,
+  ImageStyle,
+  TextStyle,
+  View,
+  ViewStyle,
+} from "react-native";
+import { color, typography } from "../../theme";
+import { Button, Text } from "..";
 
-const landscape1 = require('../../../assets/landscapes/landscape1.jpg');
+const landscape1 = require("../../../assets/landscapes/landscape1.jpg");
 
-export interface ContentCardProps {
-  title: string
+export interface GridCardProps {
+  title: string;
 }
 
-export function GridCard(props: ContentCardProps) {
+export function GridCard(props: GridCardProps) {
   const { title } = props;
   // const navigation = useNavigation()
   // const openGridItem = () => navigation.navigate("GridScreen", { title })
   return (
-    <Button preset={"blank"} style={styles.ROOT} /*onPress={openGridItem}*/>
-      <ImageBackground source={landscape1} style={styles.IMAGE} imageStyle={styles.IMAGE} >
+    <Button preset={"blank"} style={styles.ROOT} /* onPress={openGridItem} */>
+      <ImageBackground
+        source={landscape1}
+        style={styles.IMAGE}
+        imageStyle={styles.IMAGE}
+      >
         <View style={styles.TEXT_CONTAINER}>
-          <Text preset={"cardHeader"} style={styles.TEXT} numberOfLines={2} capitalise>{title}</Text>
+          <Text
+            preset={"cardHeader"}
+            style={styles.TEXT}
+            numberOfLines={2}
+            capitalise
+          >
+            {title}
+          </Text>
         </View>
       </ImageBackground>
     </Button>
-  )
+  );
 }
 
 const styles = {
@@ -39,11 +56,11 @@ const styles = {
   } as ViewStyle,
   IMAGE: {
     borderRadius: 7,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   } as ImageStyle,
   TEXT_CONTAINER: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     flex: 1,
     overflow: "hidden",
     paddingHorizontal: 12,
@@ -57,9 +74,9 @@ const styles = {
     fontFamily: typography.museoXThick,
     fontWeight: "bold",
     color: color.palette.white,
-    textShadowColor: 'black',
+    textShadowColor: "black",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
     shadowRadius: 4,
-  } as TextStyle
-}
+  } as TextStyle,
+};
