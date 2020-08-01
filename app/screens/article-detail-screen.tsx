@@ -11,7 +11,6 @@ const landscape1 = require('../../assets/landscapes/landscape1.jpg');
 type Props = StackScreenProps<PrimaryParamList, 'ArticleDetail'>;
 
 export const ArticleDetailScreen: Component = observer(function ArticleDetailScreen(props: Props) {
-  console.log('mpf article detail props: ', props);
   const article: Article = props.route.params.item;
 
   return (
