@@ -15,8 +15,8 @@ export const FormScreen: Component = observer(function FormScreen() {
   const [checked, setChecked] = useState(false)
 
   const handleConfirm = (date: Date) => {
-    setDate(date.toDateString())
     setShowDatePicker(false)
+    setDate(date.toDateString())
   }
 
   return (
@@ -41,7 +41,6 @@ export const FormScreen: Component = observer(function FormScreen() {
           style={[TEXT_INPUT, TEXT_INPUT_LARGE]}
           placeholder={"Add a description here..."} numberOfLines={3} multiline/>
         <Text text="Date"/>
-        {/* todo mpf fix multiple dialog opens on android */}
         <Button preset={"blank"} onPress={() => setShowDatePicker(true)}>
           <TextInput pointerEvents="none" style={[TEXT_INPUT, TEXT_INPUT_DATE]} placeholder={"01/02/today"}
             returnKeyType={"next"} editable={false} value={date}/>
