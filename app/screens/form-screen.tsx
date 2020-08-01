@@ -8,15 +8,19 @@ import { Feather } from "@expo/vector-icons"
 import { color, typography } from "../theme"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 
-export const FormScreen: Component = observer(function FormScreen() {
+export const FormScreen: Component = observer(function FormScreen(this: any) {
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [date, setDate] = useState(null)
   const [time, setTime] = useState(null)
   const [checked, setChecked] = useState(false)
+  let refEmail: TextInput;
+  let refPhone: TextInput;
+  let refPassword: TextInput;
+  let refDescription: TextInput;
 
   const handleConfirm = (date: Date) => {
     setShowDatePicker(false)
-    setDate(date.toDateString())
+    setDate(date.toDateString());
   }
 
   return (
@@ -24,25 +28,27 @@ export const FormScreen: Component = observer(function FormScreen() {
       <Text preset="screenTitle" text="Form"/>
       <View style={FORM_CONTAINER}>
         <Text text="Name"/>
-        <TextInput style={TEXT_INPUT} placeholder={"John Smith"} returnKeyType={"next"}/>
+        <TextInput style={TEXT_INPUT} placeholder={"John Smith"} returnKeyType={"next"}
+          autoFocus={true} onSubmitEditing={() => { refEmail?.focus(); }} blurOnSubmit={false}/>
         <Text text="Email"/>
-        <TextInput style={TEXT_INPUT} placeholder={"john.s@gmail.com"} returnKeyType={"next"}
-          keyboardType={"email-address"}/>
+        <TextInput ref={(ref) => { refEmail = ref }} style={TEXT_INPUT}
+          placeholder={"john.s@gmail.com"} returnKeyType={"next"}
+          keyboardType={"email-address"} onSubmitEditing={() => { refPhone?.focus(); }} blurOnSubmit={false}/>
         <Text text="Phone number"/>
-        <TextInput style={TEXT_INPUT} placeholder={"0123456789"} returnKeyType={"next"} keyboardType={"number-pad"}/>
+        <TextInput ref={(ref) => { refPhone = ref }} style={TEXT_INPUT}
+          placeholder={"0123456789"} returnKeyType={"next"} keyboardType={"number-pad"}
+          onSubmitEditing={() => { refPassword?.focus(); }} blurOnSubmit={false}/>
         <Text text="Password"/>
-        <TextInput style={TEXT_INPUT} placeholder={"Password"} returnKeyType={"next"} secureTextEntry/>
-        <Text text="Password"/>
-        <TextInput style={TEXT_INPUT} placeholder={"Password"} returnKeyType={"next"} secureTextEntry/>
-        <Text text="Password"/>
-        <TextInput style={TEXT_INPUT} placeholder={"Password"} returnKeyType={"next"} secureTextEntry/>
+        <TextInput ref={(ref) => { refPassword = ref }} style={TEXT_INPUT}
+          placeholder={"Password"} returnKeyType={"next"} secureTextEntry
+          onSubmitEditing={() => { refDescription?.focus(); }} blurOnSubmit={false}/>
         <Text text="Description"/>
-        <TextInput
+        <TextInput ref={(ref) => { refDescription = ref }}
           style={[TEXT_INPUT, TEXT_INPUT_LARGE]}
           placeholder={"Add a description here..."} numberOfLines={3} multiline/>
         <Text text="Date"/>
         <Button preset={"blank"} onPress={() => setShowDatePicker(true)}>
-          <TextInput pointerEvents="none" style={[TEXT_INPUT, TEXT_INPUT_DATE]} placeholder={"01/02/today"}
+          <TextInput pointerEvents="none" style={[TEXT_INPUT, TEXT_INPUT_DATE]} placeholder={"12/12/2020"}
             returnKeyType={"next"} editable={false} value={date}/>
         </Button>
         <DateTimePickerModal
