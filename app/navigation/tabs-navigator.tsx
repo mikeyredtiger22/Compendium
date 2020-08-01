@@ -7,7 +7,7 @@
 import React, { FunctionComponent } from "react"
 import { ArticleDetailScreen, ContentScreen, DemoScreen, FormScreen, GridScreen, WelcomeScreen } from "../screens"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { FontAwesome5 } from "@expo/vector-icons"
+import * as Icons from "@expo/vector-icons"
 import { color } from "../theme"
 import { createStackNavigator } from "@react-navigation/stack"
 import { Button } from "../components"
@@ -55,7 +55,7 @@ export function TabsNavigator(props) {
       }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          return <FontAwesome5 name={getTabIcon(route.name)} solid={focused} size={size} color={color} />;
+          return getTabIcon(route.name, focused, color, size)
         },
       })}
     >
@@ -99,26 +99,33 @@ function getStackScreen(title: string, component: FunctionComponent, navigation)
   }
 }
 
-const getTabIcon = (screenName: string) => {
+const getTabIcon = (screenName: string, focused, color, size) => {
   switch (screenName) {
     case 'Content':
-      return 'list-alt'
+      return <Icons.FontAwesome5 name={focused ? 'list-alt' : 'list-ul'} size={ focused ? size : size * (15 / 24) } color={color} />
     case 'Grid':
-      return 'th-large'
+      return focused
+        ? <Icons.Entypo name={"grid"} size={size * 1.25} color={color}/>
+        : <Icons.Feather name={"grid"} size={size} color={color}/>
     case 'Form':
-      return 'user-tie'
+      return <Icons.MaterialIcons name={focused ? 'person' : 'person-outline'} size={size} color={color} />
     case 'Map':
-      return 'map-marked-alt'
+      return focused
+        ? <Icons.FontAwesome5 name={'map-marked-alt'} size={size} color={color} />
+        // eslint-disable-next-line react-native/no-inline-styles
+        : <Icons.FontAwesome5 style={{ paddingTop: 6 }} name={'map'} size={size} color={color} />
     case 'Website':
-      return 'globe'
+      return focused
+        ? <Icons.FontAwesome5 name={'globe'} size={size} color={color} />
+        : <Icons.SimpleLineIcons name={'globe'} size={size} color={color} />
     default:
-      return 'times-circle'
+      return <Icons.FontAwesome5 name={'times-circle'} size={size} color={color} />
   }
 }
 const drawerOpenIcon = (navigation) => {
   return (
     <Button style={OPEN_DRAWER_BUTTON} onPress={() => navigation.openDrawer()}>
-      <FontAwesome5 name='bars' color={color.palette.white} size={20}/>
+      <Icons.FontAwesome5 name='bars' color={color.palette.white} size={20}/>
     </Button>
   )
 }
