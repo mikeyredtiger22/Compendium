@@ -1,11 +1,10 @@
 import * as React from "react";
-import { Dimensions, Image, ImageStyle, View, ViewStyle } from "react-native";
+import { Dimensions, ImageStyle, View, ViewStyle } from "react-native";
 import { spacing } from "../../theme";
 import { Button, Text } from "..";
 import { Article } from "../../models/article/article";
 import { useNavigation } from "@react-navigation/native";
-
-const landscape1 = require("../../../assets/landscapes/landscape1.jpg");
+import { MockImage } from "../mock-image";
 
 export interface ContentCardProps {
   item: Article;
@@ -25,7 +24,7 @@ export function ContentCard(props: ContentCardProps) {
   const openArticle = () => navigation.navigate("ArticleDetail", { item });
   return (
     <Button preset={"blank"} style={styles.ROOT} onPress={openArticle}>
-      <Image source={landscape1} style={styles.IMAGE} />
+      <MockImage width={588} height={200} style={styles.IMAGE} />
       <View style={styles.TEXT_CONTAINER}>
         <Text preset={"cardHeader"} numberOfLines={2} capitalise>
           {item.title}

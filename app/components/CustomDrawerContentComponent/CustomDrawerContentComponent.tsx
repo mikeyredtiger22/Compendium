@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  Image,
   ImageStyle,
   Linking,
   SafeAreaView,
@@ -15,7 +14,7 @@ import {
 } from "@react-navigation/drawer";
 import { flatten, mergeAll } from "ramda";
 import { color } from "../../theme";
-export const drawerHeader = require("./drawer_header.png");
+import { MockImage } from "../mock-image";
 
 export function CustomDrawerContentComponent(
   props: DrawerContentComponentProps,
@@ -27,8 +26,9 @@ export function CustomDrawerContentComponent(
       )}
     >
       <View style={DRAWER_HEADER}>
-        <Image
-          source={drawerHeader}
+        <MockImage
+          width={560}
+          height={400}
           style={DRAWER_HEADER_IMAGE}
           resizeMode={"cover"}
         />

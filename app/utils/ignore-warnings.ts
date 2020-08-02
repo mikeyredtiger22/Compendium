@@ -4,4 +4,4 @@
  */
 import { YellowBox } from "react-native";
 
-YellowBox.ignoreWarnings([]);
+YellowBox.ignoreWarnings(["VirtualizedLists should never"]);

@@ -9,8 +9,6 @@ import {
 import { color, typography } from "../../theme";
 import { Button, Text } from "..";
 
-const landscape1 = require("../../../assets/landscapes/landscape1.jpg");
-
 export interface GridCardProps {
   title: string;
 }
@@ -22,7 +20,7 @@ export function GridCard(props: GridCardProps) {
   return (
     <Button preset={"blank"} style={styles.ROOT} /* onPress={openGridItem} */>
       <ImageBackground
-        source={landscape1}
+        source={{ uri: "http://placeimg.com/370/370/nature" }}
         style={styles.IMAGE}
         imageStyle={styles.IMAGE}
       >
