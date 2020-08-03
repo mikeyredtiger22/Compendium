@@ -4,4 +4,5 @@
  */
 import { YellowBox } from "react-native";
 
-YellowBox.ignoreWarnings(["VirtualizedLists should never"]);
+// todo mpf fix
+YellowBox.ignoreWarnings(["VirtualizedLists should never", "Require cycle"]);

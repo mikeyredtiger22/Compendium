@@ -48,10 +48,6 @@ export const color = {
    * Secondary information.
    */
   dim: palette.lightGrey,
-  /**
-   * Error messages and icons.
-   */
-  error: palette.angry,
 
   /**
    * Storybook background for Text stories, or any stories where

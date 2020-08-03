@@ -1,9 +1,14 @@
-import React, { FunctionComponent as Component, useState } from "react";
+import React, {
+  FunctionComponent as Component,
+  RefCallback,
+  useState,
+} from "react";
 import { observer } from "mobx-react-lite";
 import {
   Platform,
   StyleSheet,
   TextInput,
+  TextInputProps,
   TextStyle,
   View,
   ViewStyle,
@@ -14,12 +19,64 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { Feather } from "@expo/vector-icons";
 import { color, typography } from "../theme";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import {
+  useForm,
+  Controller,
+  Control,
+  ValidationRules,
+  FieldError,
+} from "react-hook-form";
+
+interface ValidatedTextInputProps extends TextInputProps {
+  name: string;
+  control: Control;
+  error: FieldError;
+  rules: ValidationRules;
+  refCallback?: RefCallback<TextInput>;
+  large?: boolean;
+}
+
+const ValidatedTextInput = (props: ValidatedTextInputProps) => {
+  return (
+    <>
+      {props.error && (
+        <Text preset={"error"}>
+          {props.error.message || "This is required."}
+        </Text>
+      )}
+      <Controller
+        control={props.control}
+        name={props.name}
+        rules={props.rules}
+        render={({ onChange, onBlur, value }) => (
+          <TextInput
+            style={[
+              TEXT_INPUT,
+              props.error ? TEXT_INPUT_ERROR : {},
+              props.large ? TEXT_INPUT_LARGE : {},
+            ]}
+            ref={props.refCallback}
+            returnKeyType={"next"}
+            blurOnSubmit={false}
+            onBlur={onBlur}
+            onChangeText={value => onChange(value)}
+            value={value}
+            numberOfLines={props.large ? 3 : undefined}
+            multiline={props.large}
+            {...props}
+          />
+        )}
+      />
+    </>
+  );
+};
 
 export const FormScreen: Component = observer(function FormScreen() {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
   const [checked, setChecked] = useState(false);
+
   let refEmail: TextInput;
   let refPhone: TextInput;
   let refPassword: TextInput;
@@ -29,78 +86,116 @@ export const FormScreen: Component = observer(function FormScreen() {
     setShowDatePicker(false);
     setDate(date.toDateString());
   };
+
+  const { control, handleSubmit, errors } = useForm({
+    mode: "onBlur",
+    reValidateMode: "onChange",
+  });
+
   return (
     <KeyboardAwareScrollView style={SCROLL_VIEW}>
       <Text preset="screenTitle" text="Form" />
       <View style={FORM_CONTAINER}>
         <Text text="Name" />
-        <TextInput
-          style={TEXT_INPUT}
+        <ValidatedTextInput
+          name={"name"}
           placeholder={"John Smith"}
-          returnKeyType={"next"}
-          autoFocus={true}
+          control={control}
+          error={errors.name}
           onSubmitEditing={() => {
             refEmail?.focus();
           }}
-          blurOnSubmit={false}
+          rules={{
+            required: "Required!",
+            minLength: { value: 2, message: "Longer!" },
+            maxLength: { value: 100, message: "Shorter!" },
+          }}
         />
         <Text text="Email" />
-        <TextInput
-          ref={ref => {
+        <ValidatedTextInput
+          name={"email"}
+          placeholder={"john.s@gmail.com"}
+          control={control}
+          error={errors.email}
+          refCallback={ref => {
             refEmail = ref;
           }}
-          style={TEXT_INPUT}
-          placeholder={"john.s@gmail.com"}
-          returnKeyType={"next"}
-          keyboardType={"email-address"}
           onSubmitEditing={() => {
             refPhone?.focus();
           }}
-          blurOnSubmit={false}
+          rules={{
+            required: "Required!",
+            maxLength: { value: 100, message: "Shorter!" },
+            pattern: {
+              value: RegExp(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              ),
+              message: "Invalid email!",
+            },
+          }}
         />
-        <Text text="Phone number" />
-        <TextInput
-          ref={ref => {
+        <Text text="Phone Number" />
+        <ValidatedTextInput
+          name={"phone"}
+          placeholder={"0123456789"}
+          keyboardType={"number-pad"}
+          control={control}
+          error={errors.phone}
+          refCallback={ref => {
             refPhone = ref;
           }}
-          style={TEXT_INPUT}
-          placeholder={"0123456789"}
-          returnKeyType={"next"}
-          keyboardType={"number-pad"}
           onSubmitEditing={() => {
             refPassword?.focus();
           }}
-          blurOnSubmit={false}
+          rules={{
+            required: "Required!",
+            minLength: { value: 9, message: "Longer!" },
+            maxLength: { value: 12, message: "Shorter!" },
+            pattern: {
+              value: RegExp(`^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- ()]*$`),
+              message: "Invalid phone number!",
+            },
+          }}
         />
         <Text text="Password" />
-        <TextInput
-          ref={ref => {
+        <ValidatedTextInput
+          name={"password"}
+          placeholder={"Password"}
+          secureTextEntry
+          control={control}
+          error={errors.password}
+          refCallback={ref => {
             refPassword = ref;
           }}
-          style={TEXT_INPUT}
-          placeholder={"Password"}
-          returnKeyType={"next"}
-          secureTextEntry
           onSubmitEditing={() => {
             refDescription?.focus();
           }}
-          blurOnSubmit={false}
+          rules={{
+            required: "Required!",
+            minLength: { value: 6, message: "Longer!" },
+            maxLength: { value: 50, message: "Shorter!" },
+          }}
         />
         <Text text="Description" />
-        <TextInput
-          ref={ref => {
+        <ValidatedTextInput
+          name={"description"}
+          placeholder={"Add a description here..."}
+          large
+          returnKeyType={"default"}
+          control={control}
+          error={errors.description}
+          refCallback={ref => {
             refDescription = ref;
           }}
-          style={[TEXT_INPUT, TEXT_INPUT_LARGE]}
-          placeholder={"Add a description here..."}
-          numberOfLines={3}
-          multiline
+          rules={{
+            maxLength: { value: 300, message: "Shorter!" },
+          }}
         />
         <Text text="Date" />
         <Button preset={"blank"} onPress={() => setShowDatePicker(true)}>
           <TextInput
             pointerEvents="none"
-            style={[TEXT_INPUT, TEXT_INPUT_DATE]}
+            style={TEXT_INPUT}
             placeholder={"12/12/2020"}
             returnKeyType={"next"}
             editable={false}
@@ -153,6 +248,7 @@ export const FormScreen: Component = observer(function FormScreen() {
           style={SUBMIT_BUTTON}
           textStyle={SUBMIT_BUTTON_TEXT}
           text={"Submit"}
+          onPress={handleSubmit(data => console.log("mpf submit", data))}
         />
       </View>
     </KeyboardAwareScrollView>
@@ -171,17 +267,18 @@ const TEXT_INPUT: TextStyle = {
   borderColor: color.palette.darkGrey,
   borderRadius: 6,
   padding: 10,
-  marginTop: 10,
+  marginTop: 5,
   marginBottom: 15,
+};
+const TEXT_INPUT_ERROR: TextStyle = {
+  borderColor: color.palette.error,
+  borderWidth: 1,
 };
 const TEXT_INPUT_LARGE: TextStyle = {
   textAlignVertical: "top",
   minHeight: 80,
   maxHeight: Platform.OS === "ios" ? 200 : undefined,
   paddingTop: 10,
-};
-const TEXT_INPUT_DATE: TextStyle = {
-  flex: 1,
 };
 const DROPDOWN_FIELD: ViewStyle = {
   // override default styles applied by library to match other fields

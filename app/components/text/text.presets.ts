@@ -20,7 +20,9 @@ export const presets = {
    * The default text styles.
    */
   default: BASE,
-
+  error: {
+    color: color.palette.error,
+  } as TextStyle,
   screenTitle: {
     ...BASE,
     fontSize: 35,
