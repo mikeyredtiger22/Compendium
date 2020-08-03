@@ -77,6 +77,11 @@ export const FormScreen: Component = observer(function FormScreen() {
   const [time, setTime] = useState(null);
   const [checked, setChecked] = useState(false);
 
+  const dateError =
+    date &&
+    // must be at least 1 day in the future
+    Math.round((date.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) < 1;
+
   let refEmail: TextInput;
   let refPhone: TextInput;
   let refPassword: TextInput;
@@ -84,7 +89,7 @@ export const FormScreen: Component = observer(function FormScreen() {
 
   const handleConfirm = (date: Date) => {
     setShowDatePicker(false);
-    setDate(date.toDateString());
+    setDate(date);
   };
 
   const { control, handleSubmit, errors } = useForm({
@@ -192,14 +197,19 @@ export const FormScreen: Component = observer(function FormScreen() {
           }}
         />
         <Text text="Date" />
+        {dateError && (
+          <Text preset={"error"}>
+            {"Date must be at least 1 day in the future"}
+          </Text>
+        )}
         <Button preset={"blank"} onPress={() => setShowDatePicker(true)}>
           <TextInput
             pointerEvents="none"
-            style={TEXT_INPUT}
+            style={[TEXT_INPUT, dateError ? TEXT_INPUT_ERROR : {}]}
             placeholder={"12/12/2020"}
             returnKeyType={"next"}
             editable={false}
-            value={date}
+            value={date?.toDateString()}
           />
         </Button>
         <DateTimePickerModal
