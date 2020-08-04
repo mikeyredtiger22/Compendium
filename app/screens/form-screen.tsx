@@ -72,10 +72,10 @@ const ValidatedTextInput = (props: ValidatedTextInputProps) => {
 };
 
 export const FormScreen: Component = observer(function FormScreen() {
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [date, setDate] = useState(null);
-  const [time, setTime] = useState(null);
-  const [checked, setChecked] = useState(false);
+  const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
+  const [date, setDate] = useState<Date>(null);
+  const [time, setTime] = useState<string>(null);
+  const [checked, setChecked] = useState<boolean>(false);
 
   const dateError =
     date &&
@@ -92,10 +92,13 @@ export const FormScreen: Component = observer(function FormScreen() {
     setDate(date);
   };
 
-  const { control, handleSubmit, errors } = useForm({
+  const { control, handleSubmit, errors, getValues, formState } = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
   });
+
+  const allFormDataIsValid =
+    formState.isValid && date && !dateError && time && checked;
 
   return (
     <KeyboardAwareScrollView style={SCROLL_VIEW}>
@@ -249,16 +252,28 @@ export const FormScreen: Component = observer(function FormScreen() {
             name={checked ? "check-square" : "square"}
             size={18}
           />
-          <Text
-            style={{ fontFamily: typography.museo }}
-            text="I agree to checking this box."
-          />
+          <Text style={CHECKBOX_TEXT} text="I agree to checking this box." />
         </Button>
         <Button
-          style={SUBMIT_BUTTON}
+          style={[
+            SUBMIT_BUTTON,
+            !allFormDataIsValid ? SUBMIT_BUTTON_DISABLED : {},
+          ]}
           textStyle={SUBMIT_BUTTON_TEXT}
           text={"Submit"}
-          onPress={handleSubmit(data => console.log("mpf submit", data))}
+          onPress={() => {
+            // handleSubmit method validates all fields
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            handleSubmit(() => {})();
+            if (allFormDataIsValid) {
+              const allData = {
+                ...getValues(),
+                date: date.getTime(),
+                time,
+              };
+              console.log("Submitted form values: ", allData);
+            }
+          }}
         />
       </View>
     </KeyboardAwareScrollView>
@@ -330,12 +345,18 @@ const CHECKBOX_CONTAINER: ViewStyle = {
 const CHECKBOX: ViewStyle = {
   paddingRight: 5,
 };
+const CHECKBOX_TEXT: TextStyle = {
+  fontFamily: typography.museo,
+};
 const SUBMIT_BUTTON: ViewStyle = {
   borderRadius: 6,
   paddingTop: 10,
   paddingBottom: 10,
   marginTop: 10,
   marginBottom: 15,
+};
+const SUBMIT_BUTTON_DISABLED: ViewStyle = {
+  backgroundColor: color.palette.lightGrey,
 };
 const SUBMIT_BUTTON_TEXT: TextStyle = {
   fontSize: 20,
