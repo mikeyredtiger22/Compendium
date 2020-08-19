@@ -1,27 +1,43 @@
 import React from "react";
 import { Image, ImageProps } from "react-native";
 
-// @ts-ignore
-interface MockImageProps extends ImageProps {
+// The Omit expression removes the "source" field from the interface
+interface MockImageProps extends Omit<ImageProps, "source"> {
   width: number;
   height: number;
+  index?: number;
   category?: string;
-  source?: undefined;
+}
+
+interface MockImageUrlProps {
+  width: number;
+  height: number;
+  index?: number;
+  category?: string;
 }
 
 export function MockImage({
+  width,
+  height,
+  category,
+  index,
+  ...props
+}: MockImageProps) {
+  const uri = getMockImageUrl({ width, height, category, index });
+  return (
+    <Image resizeMode={"cover"} source={{ uri, cache: "reload" }} {...props} />
+  );
+}
+
+export function getMockImageUrl({
   width = 500,
   height = 500,
   category = "nature",
-  ...props
-}: MockImageProps) {
-  return (
-    <Image
-      source={{
-        uri: `http://placeimg.com/${width}/${height}/${category}`,
-        cache: "reload",
-      }}
-      {...props}
-    />
-  );
+  index,
+}: MockImageUrlProps): string {
+  let uri = `https://loremflickr.com/${width}/${height}/${category}`;
+  if (typeof index === "number") {
+    uri += `?lock=${index}`;
+  }
+  return uri;
 }

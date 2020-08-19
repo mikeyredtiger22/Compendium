@@ -41,6 +41,7 @@ export type PrimaryParamList = {
   Website: undefined;
   ArticleDetail: {
     item: Article;
+    index?: number;
   };
 };
 

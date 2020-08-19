@@ -19,12 +19,18 @@ const screenWidth = Math.round(Dimensions.get("window").width);
  * Component description here for TypeScript tips.
  */
 export function ContentCard(props: ContentCardProps) {
-  const { item } = props;
+  const { item, index } = props;
   const navigation = useNavigation();
-  const openArticle = () => navigation.navigate("ArticleDetail", { item });
+  const openArticle = () =>
+    navigation.navigate("ArticleDetail", { item, index });
   return (
     <Button preset={"blank"} style={styles.ROOT} onPress={openArticle}>
-      <MockImage width={588} height={200} style={styles.IMAGE} />
+      <MockImage
+        width={588}
+        height={200}
+        index={props.index}
+        style={styles.IMAGE}
+      />
       <View style={styles.TEXT_CONTAINER}>
         <Text preset={"cardHeader"} numberOfLines={2} capitalise>
           {item.title}

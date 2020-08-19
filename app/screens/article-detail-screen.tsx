@@ -11,13 +11,16 @@ type Props = StackScreenProps<PrimaryParamList, "ArticleDetail">;
 
 export const ArticleDetailScreen: Component = observer(
   function ArticleDetailScreen(props: Props) {
-    const article: Article = props.route.params.item;
+    const {
+      item,
+      index,
+    }: { item: Article; index?: number } = props.route.params;
 
     return (
       <Screen preset="scroll">
-        <MockImage width={560} height={400} style={IMAGE} />
-        <Text preset="screenTitle" text={article.title} />
-        <Text preset="bold" style={CONTENT} text={article.content} />
+        <MockImage width={560} height={400} style={IMAGE} index={index} />
+        <Text preset="screenTitle" text={item.title} />
+        <Text preset="bold" style={CONTENT} text={item.content} />
       </Screen>
     );
   },

@@ -8,21 +8,29 @@ import {
 } from "react-native";
 import { color, typography } from "../../theme";
 import { Button, Text } from "..";
+import { getMockImageUrl } from "../mock-image";
 
 export interface GridCardProps {
   title: string;
+  index?: number;
 }
 
 export function GridCard(props: GridCardProps) {
   const { title } = props;
+  const uri = getMockImageUrl({
+    width: 370,
+    height: 370,
+    index: props.index,
+  });
   // const navigation = useNavigation()
   // const openGridItem = () => navigation.navigate("GridScreen", { title })
   return (
     <Button preset={"blank"} style={styles.ROOT} /* onPress={openGridItem} */>
       <ImageBackground
-        source={{ uri: "http://placeimg.com/370/370/nature" }}
-        style={styles.IMAGE}
+        source={{ uri }}
+        style={styles.IMAGE_CONTAINER}
         imageStyle={styles.IMAGE}
+        resizeMode={"cover"}
       >
         <View style={styles.TEXT_CONTAINER}>
           <Text
@@ -51,11 +59,17 @@ const styles = {
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 1,
     shadowRadius: 8,
+    overflow: "hidden",
   } as ViewStyle,
-  IMAGE: {
-    borderRadius: 7,
+  IMAGE_CONTAINER: {
     width: "100%",
     height: "100%",
+  } as ImageStyle,
+  IMAGE: {
+    // funky hack to remove whitespace and text from loremflickr placeholder images
+    width: "125%",
+    height: "125%",
+    margin: "-12.5%",
   } as ImageStyle,
   TEXT_CONTAINER: {
     justifyContent: "flex-end",

@@ -25,7 +25,9 @@ export const GridScreen: Component = observer(function GridScreen() {
         spacing={GRID_SPACING}
         itemDimension={Math.floor(screenWidth / 2 - 1.5 * GRID_SPACING)}
         data={mockGridData}
-        renderItem={({ item }) => <GridCard title={item} />}
+        renderItem={({ item, index }) => (
+          <GridCard title={item} index={index} />
+        )}
         keyExtractor={item => item}
       />
     </Screen>
