@@ -72,3 +72,6 @@ app/config/env.*.js
 # Expo
 .expo
 .expo-shared
+
+# Database Secrets
+/app/services/database-config.ts
