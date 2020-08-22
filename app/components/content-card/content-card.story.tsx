@@ -13,11 +13,9 @@ storiesOf("ContentCard", module)
         <ContentCard
           index={0}
           item={{
+            id: "article-id",
             title: "Mock title",
             content: "Mock content",
-            favourited: false,
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            toggleFavourited: () => {},
           }}
         />
       </UseCase>

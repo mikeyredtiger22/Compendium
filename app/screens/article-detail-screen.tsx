@@ -1,11 +1,13 @@
-import React, { FunctionComponent as Component } from "react";
+import React, { FunctionComponent as Component, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { ImageStyle, TextStyle } from "react-native";
-import { Screen, Text } from "../components";
+import { ImageStyle, TextStyle, View, ViewStyle } from "react-native";
+import { Screen, setupArticleFavouriting, Text } from "../components";
 import { Article } from "../models/article/article";
 import { StackScreenProps } from "@react-navigation/stack";
 import { PrimaryParamList } from "../navigation";
 import { MockImage } from "../components/mock-image";
+import * as Icons from "@expo/vector-icons";
+import { toggleFavouriteArticle } from "../services/database";
 
 type Props = StackScreenProps<PrimaryParamList, "ArticleDetail">;
 
@@ -16,10 +18,25 @@ export const ArticleDetailScreen: Component = observer(
       index,
     }: { item: Article; index?: number } = props.route.params;
 
+    const [favourited, setFavourited] = useState(null);
+    setupArticleFavouriting(props.route.params, favourited, setFavourited);
+
     return (
       <Screen preset="scroll">
         <MockImage width={560} height={400} style={IMAGE} index={index} />
-        <Text preset="screenTitle" text={item.title} />
+        <View style={TOP_ROW_CONTAINER}>
+          <Text preset="screenTitle" style={TITLE} text={item.title} />
+          {/* Show icon only if favourited field exists */}
+          {typeof favourited === "boolean" && (
+            <Icons.AntDesign
+              style={FAVOURITE_ICON}
+              name={favourited ? "heart" : "hearto"}
+              size={35}
+              color={"red"}
+              onPress={() => toggleFavouriteArticle(item.id)}
+            />
+          )}
+        </View>
         <Text preset="bold" style={CONTENT} text={item.content} />
       </Screen>
     );
@@ -35,4 +52,14 @@ const IMAGE: ImageStyle = {
 };
 const CONTENT: TextStyle = {
   paddingHorizontal: 20,
+};
+const TOP_ROW_CONTAINER: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+};
+const FAVOURITE_ICON: ViewStyle = {
+  padding: 20,
+};
+const TITLE: TextStyle = {
+  flex: 1,
 };

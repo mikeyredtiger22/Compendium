@@ -3,18 +3,11 @@ import { Instance, SnapshotOut, types } from "mobx-state-tree";
 /**
  * Model description here for TypeScript hints.
  */
-export const ArticleModel = types
-  .model("Article")
-  .props({
-    title: types.string,
-    content: types.string,
-    favourited: false,
-  })
-  .actions(self => ({
-    toggleFavourited() {
-      self.favourited = !self.favourited;
-    },
-  }));
+export const ArticleModel = types.model("Article").props({
+  id: types.string,
+  title: types.string,
+  content: types.string,
+});
 // .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 // .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 
