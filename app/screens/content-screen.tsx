@@ -1,7 +1,7 @@
 import React, { FunctionComponent as Component } from "react";
 import { observer } from "mobx-react-lite";
 import { View, ViewStyle } from "react-native";
-import { Carousel, Screen, Text } from "../components";
+import { Carousel, SavedForms, Screen, Text } from "../components";
 import { color, spacing } from "../theme";
 import { RootStore, useStores } from "../models";
 
@@ -14,6 +14,7 @@ export const ContentScreen: Component = observer(function ContentScreen() {
       <View style={CAROUSEL_CONTAINER}>
         <Carousel data={articles} />
       </View>
+      <SavedForms />
     </Screen>
   );
 });

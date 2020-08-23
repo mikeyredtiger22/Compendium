@@ -7,7 +7,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { PrimaryParamList } from "../navigation";
 import { MockImage } from "../components/mock-image";
 import * as Icons from "@expo/vector-icons";
-import { toggleFavouriteArticle } from "../services/database";
+import { toggleFavouriteArticle } from "../services/database/articles";
 
 type Props = StackScreenProps<PrimaryParamList, "ArticleDetail">;
 

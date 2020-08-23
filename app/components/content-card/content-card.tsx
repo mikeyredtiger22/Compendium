@@ -12,12 +12,12 @@ import { Article } from "../../models/article/article";
 import { useNavigation } from "@react-navigation/native";
 import { MockImage } from "../mock-image";
 import * as Icons from "@expo/vector-icons";
+import { useEffect, useState } from "react";
 import {
-  toggleFavouriteArticle,
   listenToArticleFavourited,
   stopListenToArticleFavourited,
-} from "../../services/database";
-import { useEffect, useState } from "react";
+  toggleFavouriteArticle,
+} from "../../services/database/articles";
 
 export interface ContentCardProps {
   item: Article;

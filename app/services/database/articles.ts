@@ -1,17 +1,13 @@
 import * as firebase from "firebase";
 import Constants from "expo-constants";
-import { firebaseConfig } from "./database-config";
-
-export function setupDatabase() {
-  firebase.initializeApp(firebaseConfig);
-}
 
 function articleFavouritedData(articleId: string) {
   return firebase
     .database()
     .ref("userData")
     .child(Constants.installationId)
-    .child("favouriteArticles")
+    .child("saved")
+    .child("articles")
     .child(articleId);
 }
 

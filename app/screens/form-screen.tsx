@@ -20,12 +20,13 @@ import { Feather } from "@expo/vector-icons";
 import { color, typography } from "../theme";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import {
-  useForm,
-  Controller,
   Control,
-  ValidationRules,
+  Controller,
   FieldError,
+  useForm,
+  ValidationRules,
 } from "react-hook-form";
+import { addForm, isFormType } from "../services/database/forms";
 
 interface ValidatedTextInputProps extends TextInputProps {
   name: string;
@@ -87,7 +88,7 @@ export const FormScreen: Component = observer(function FormScreen() {
   let refPassword: TextInput;
   let refDescription: TextInput;
 
-  const handleConfirm = (date: Date) => {
+  const onConfirmDate = (date: Date) => {
     setShowDatePicker(false);
     setDate(date);
   };
@@ -218,7 +219,7 @@ export const FormScreen: Component = observer(function FormScreen() {
         <DateTimePickerModal
           isVisible={showDatePicker}
           mode="date"
-          onConfirm={handleConfirm}
+          onConfirm={onConfirmDate}
           onCancel={() => setShowDatePicker(false)}
         />
         <Text text="Time" />
@@ -266,12 +267,18 @@ export const FormScreen: Component = observer(function FormScreen() {
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             handleSubmit(() => {})();
             if (allFormDataIsValid) {
-              const allData = {
+              const completedFormData = {
                 ...getValues(),
                 date: date.getTime(),
                 time,
               };
-              console.log("Submitted form values: ", allData);
+              if (isFormType(completedFormData)) {
+                addForm(completedFormData);
+              } else {
+                throw new TypeError(
+                  `Completed form is not of custom type Form: ${completedFormData}, `,
+                );
+              }
             }
           }}
         />
