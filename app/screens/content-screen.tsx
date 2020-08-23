@@ -9,7 +9,7 @@ export const ContentScreen: Component = observer(function ContentScreen() {
   const { articles }: RootStore = useStores();
 
   return (
-    <Screen style={ROOT} preset="scroll">
+    <Screen preset="scroll">
       <Text preset="screenTitle" text="Content Screen" />
       <View style={CAROUSEL_CONTAINER}>
         <Carousel data={articles} />
@@ -19,9 +19,6 @@ export const ContentScreen: Component = observer(function ContentScreen() {
   );
 });
 
-const ROOT: ViewStyle = {
-  flex: 1,
-};
 const CAROUSEL_CONTAINER: ViewStyle = {
   marginTop: spacing[4],
   paddingBottom: spacing[2],

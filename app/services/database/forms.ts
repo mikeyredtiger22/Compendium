@@ -23,6 +23,12 @@ export function addForm(form: Form) {
   formData().push(form);
 }
 
+export function deleteForm(formId: string) {
+  formData()
+    .child(formId)
+    .remove();
+}
+
 export async function getForm(formId: string): Promise<Form> {
   const snapshot = await formData()
     .child(formId)

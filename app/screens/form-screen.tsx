@@ -267,16 +267,24 @@ export const FormScreen: Component = observer(function FormScreen() {
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             handleSubmit(() => {})();
             if (allFormDataIsValid) {
+              const currentDate = Date.now();
               const completedFormData = {
                 ...getValues(),
                 date: date.getTime(),
                 time,
+                checked,
+                metaData: {
+                  createdDate: currentDate,
+                  lastModifiedDate: currentDate,
+                },
               };
               if (isFormType(completedFormData)) {
                 addForm(completedFormData);
               } else {
                 throw new TypeError(
-                  `Completed form is not of custom type Form: ${completedFormData}, `,
+                  `Completed form is not of custom type Form. Completed form object keys: ${Object.keys(
+                    completedFormData,
+                  )}, `,
                 );
               }
             }
