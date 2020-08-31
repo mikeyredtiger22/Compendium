@@ -23,6 +23,12 @@ export function addForm(form: Form) {
   formData().push(form);
 }
 
+export function editForm(formId: string, form: Form) {
+  formData()
+    .child(formId)
+    .set(form);
+}
+
 export function deleteForm(formId: string) {
   formData()
     .child(formId)
@@ -44,7 +50,7 @@ export function listenToAllForms(
   });
 }
 
-export function stopListenToArticleFavourited() {
+export function stopListenToAllForms() {
   formData().off("value");
 }
 

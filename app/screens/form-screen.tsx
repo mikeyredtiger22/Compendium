@@ -1,9 +1,9 @@
 import React, {
   FunctionComponent as Component,
   RefCallback,
+  useEffect,
   useState,
 } from "react";
-import { observer } from "mobx-react-lite";
 import {
   Platform,
   StyleSheet,
@@ -26,53 +26,13 @@ import {
   useForm,
   ValidationRules,
 } from "react-hook-form";
-import { addForm, isFormType } from "../services/database/forms";
+import { addForm, editForm, isFormType } from "../services/database/forms";
+import { StackScreenProps } from "@react-navigation/stack";
+import { PrimaryParamList } from "../navigation";
 
-interface ValidatedTextInputProps extends TextInputProps {
-  name: string;
-  control: Control;
-  error: FieldError;
-  rules: ValidationRules;
-  refCallback?: RefCallback<TextInput>;
-  large?: boolean;
-}
+type Props = StackScreenProps<PrimaryParamList, "Form">;
 
-const ValidatedTextInput = (props: ValidatedTextInputProps) => {
-  return (
-    <>
-      {props.error && (
-        <Text preset={"error"}>
-          {props.error.message || "This is required."}
-        </Text>
-      )}
-      <Controller
-        control={props.control}
-        name={props.name}
-        rules={props.rules}
-        render={({ onChange, onBlur, value }) => (
-          <TextInput
-            style={[
-              TEXT_INPUT,
-              props.error ? TEXT_INPUT_ERROR : {},
-              props.large ? TEXT_INPUT_LARGE : {},
-            ]}
-            ref={props.refCallback}
-            returnKeyType={"next"}
-            blurOnSubmit={false}
-            onBlur={onBlur}
-            onChangeText={value => onChange(value)}
-            value={value}
-            numberOfLines={props.large ? 3 : undefined}
-            multiline={props.large}
-            {...props}
-          />
-        )}
-      />
-    </>
-  );
-};
-
-export const FormScreen: Component = observer(function FormScreen() {
+export const FormScreen: Component<Props> = (props: Props) => {
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
   const [date, setDate] = useState<Date>(null);
   const [time, setTime] = useState<string>(null);
@@ -93,10 +53,31 @@ export const FormScreen: Component = observer(function FormScreen() {
     setDate(date);
   };
 
-  const { control, handleSubmit, errors, getValues, formState } = useForm({
+  const {
+    control,
+    handleSubmit,
+    errors,
+    getValues,
+    formState,
+    setValue,
+  } = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
   });
+
+  // Populate form fields when editing.
+  useEffect(() => {
+    const { formDataToEdit } = props.route.params || {};
+    if (formDataToEdit) {
+      Object.keys(formDataToEdit).forEach(field => {
+        setValue(field, formDataToEdit[field]);
+      });
+      setDate(new Date(formDataToEdit.date));
+      setTime(formDataToEdit.time);
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      handleSubmit(() => {})();
+    }
+  }, []);
 
   const allFormDataIsValid =
     formState.isValid && date && !dateError && time && checked;
@@ -267,6 +248,8 @@ export const FormScreen: Component = observer(function FormScreen() {
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             handleSubmit(() => {})();
             if (allFormDataIsValid) {
+              const { formDataToEdit, formId } = props.route.params || {};
+
               const currentDate = Date.now();
               const completedFormData = {
                 ...getValues(),
@@ -274,17 +257,20 @@ export const FormScreen: Component = observer(function FormScreen() {
                 time,
                 checked,
                 metaData: {
-                  createdDate: currentDate,
+                  createdDate:
+                    formDataToEdit?.metaData?.createdDate ?? currentDate,
                   lastModifiedDate: currentDate,
                 },
               };
               if (isFormType(completedFormData)) {
-                addForm(completedFormData);
+                formDataToEdit && formId
+                  ? editForm(formId, completedFormData)
+                  : addForm(completedFormData);
               } else {
                 throw new TypeError(
                   `Completed form is not of custom type Form. Completed form object keys: ${Object.keys(
                     completedFormData,
-                  )}, `,
+                  )}`,
                 );
               }
             }
@@ -293,7 +279,51 @@ export const FormScreen: Component = observer(function FormScreen() {
       </View>
     </KeyboardAwareScrollView>
   );
-});
+};
+
+interface ValidatedTextInputProps extends TextInputProps {
+  name: string;
+  control: Control;
+  error: FieldError;
+  rules: ValidationRules;
+  refCallback?: RefCallback<TextInput>;
+  large?: boolean;
+}
+
+const ValidatedTextInput = (props: ValidatedTextInputProps) => {
+  return (
+    <>
+      {props.error && (
+        <Text preset={"error"}>
+          {props.error.message || "This is required."}
+        </Text>
+      )}
+      <Controller
+        control={props.control}
+        name={props.name}
+        rules={props.rules}
+        render={({ onChange, onBlur, value }) => (
+          <TextInput
+            style={[
+              TEXT_INPUT,
+              props.error ? TEXT_INPUT_ERROR : {},
+              props.large ? TEXT_INPUT_LARGE : {},
+            ]}
+            ref={props.refCallback}
+            returnKeyType={"next"}
+            blurOnSubmit={false}
+            onBlur={onBlur}
+            onChangeText={value => onChange(value)}
+            value={value}
+            numberOfLines={props.large ? 3 : undefined}
+            multiline={props.large}
+            {...props}
+          />
+        )}
+      />
+    </>
+  );
+};
 
 const SCROLL_VIEW: ViewStyle = {
   backgroundColor: color.palette.white,
@@ -375,4 +405,5 @@ const SUBMIT_BUTTON_DISABLED: ViewStyle = {
 };
 const SUBMIT_BUTTON_TEXT: TextStyle = {
   fontSize: 20,
+  color: color.palette.white,
 };

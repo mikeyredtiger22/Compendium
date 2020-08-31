@@ -17,7 +17,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as Icons from "@expo/vector-icons";
 import { color } from "../theme";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Button } from "../components";
+import { Button, Form } from "../components";
 import { ViewStyle } from "react-native";
 import { Article } from "../models/article/article";
 
@@ -36,7 +36,11 @@ import { Article } from "../models/article/article";
 export type PrimaryParamList = {
   Content: undefined;
   Grid: undefined;
-  Form: undefined;
+  Form: {
+    // two parameters supplied if editing form data
+    formDataToEdit?: Form;
+    formId?: string;
+  };
   Map: undefined;
   Website: undefined;
   ArticleDetail: {
@@ -113,11 +117,16 @@ function getStackScreen(
         }}
       >
         <Stack.Screen name={title} component={component} options={{ title }} />
-        <Stack.Screen
-          name={"ArticleDetail"}
-          component={ArticleDetailScreen}
-          options={{ title: "sup" }}
-        />
+        {/* Extra Content tab screens added to navigation stack */}
+        {title === "Content" && (
+          <Stack.Screen
+            name={"ArticleDetail"}
+            component={ArticleDetailScreen}
+          />
+        )}
+        {title === "Content" && (
+          <Stack.Screen name={"FormEdit"} component={FormScreen} />
+        )}
       </Stack.Navigator>
     );
   };

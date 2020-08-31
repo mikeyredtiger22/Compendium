@@ -2,9 +2,14 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { TextStyle, View, ViewStyle } from "react-native";
 import { Button, Text } from "../";
-import { deleteForm, listenToAllForms } from "../../services/database/forms";
+import {
+  deleteForm,
+  listenToAllForms,
+  stopListenToAllForms,
+} from "../../services/database/forms";
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { color } from "../../theme";
+import { useNavigation } from "@react-navigation/native";
 
 export type Form = {
   name: string;
@@ -28,7 +33,14 @@ export type Form = {
  */
 export function SavedForms() {
   const [forms, setForms] = useState<{ [name: string]: Form }>({});
+  // setup listener
   useEffect(() => listenToAllForms(setForms), []);
+  // teardown listener
+  useEffect(() => {
+    return () => {
+      stopListenToAllForms();
+    };
+  }, []);
   const formIds = Object.keys(forms);
   return (
     <>
@@ -47,6 +59,14 @@ type FormRowProps = {
 };
 
 const FormRow = (props: FormRowProps) => {
+  const navigation = useNavigation();
+  const editForm = () => {
+    navigation.navigate("FormEdit", {
+      formId: props.formId,
+      formDataToEdit: props.form,
+    });
+  };
+
   const lastModified = props.form.metaData?.lastModifiedDate
     ? new Date(props.form.metaData.lastModifiedDate).toLocaleDateString?.()
     : "unknown";
@@ -60,7 +80,7 @@ const FormRow = (props: FormRowProps) => {
           {`Last Modified: ${lastModified}`}
         </Text>
       </View>
-      <Button preset={"blank"} style={ICON_CONTAINER}>
+      <Button preset={"blank"} style={ICON_CONTAINER} onPress={editForm}>
         <Feather name={"edit"} size={28} style={ICON} />
       </Button>
       <Button
