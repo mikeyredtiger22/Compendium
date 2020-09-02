@@ -7,6 +7,21 @@
   },
   "gridScreen": {
     "header": "Example Apps",
-    "title": "Select an example app:"
+    "title": "Select an example app:",
+    "form": "Report / Form",
+    "map": "Map",
+    "website": "Website"
+  },
+  "formScreen": {
+    "header": "Form Header",
+    "title": "Form title"
+  },
+  "mapScreen": {
+    "header": "Map Header",
+    "title": "Map title"
+  },
+  "websiteScreen": {
+    "header": "Website Header",
+    "title": "Website title"
   }
 }

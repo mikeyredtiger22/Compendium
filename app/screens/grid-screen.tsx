@@ -5,18 +5,14 @@ import { FlatGrid } from 'react-native-super-grid';
 import { Dimensions } from 'react-native';
 import { Screen } from '../components/screen/screen';
 import { GridCard } from '../components/grid-card/grid-card';
+import i18n from 'i18n-js';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-const mockGridData = [
-  'Grid 1',
-  'Grid 2',
-  'Grid 3',
-  'Grid 4',
-  'Grid 5',
-  'Grid 6',
-  'Grid 7',
-  'Grid 8',
+const mockGridData: Array<{ title: string; screenNavigationName: string }> = [
+  { title: i18n.t('gridScreen.form'), screenNavigationName: 'Form' },
+  { title: i18n.t('gridScreen.map'), screenNavigationName: 'Map' },
+  { title: i18n.t('gridScreen.website'), screenNavigationName: 'Website' },
 ];
 
 export const GridScreen: Component = observer(function GridScreen() {
@@ -30,10 +26,8 @@ export const GridScreen: Component = observer(function GridScreen() {
         spacing={GRID_SPACING}
         itemDimension={Math.floor(screenWidth / 2 - 1.5 * GRID_SPACING)}
         data={mockGridData}
-        renderItem={({ item, index }) => (
-          <GridCard title={item} index={index} />
-        )}
-        keyExtractor={item => item}
+        renderItem={({ item, index }) => <GridCard {...item} index={index} />}
+        keyExtractor={item => item.screenNavigationName}
       />
     </Screen>
   );

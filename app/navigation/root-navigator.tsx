@@ -16,6 +16,9 @@ import { IntroContentScreen } from '../screens/intro-content-screen';
 import { typography } from '../theme/typography';
 import { ArticleDetailScreen } from '../screens/article-detail-screen';
 import { GridScreen } from '../screens/grid-screen';
+import { FormScreen } from '../screens/form-screen';
+import { MapScreen } from '../screens/map-screen';
+import { WebsiteScreen } from '../screens/website-screen';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +47,21 @@ const RootStackNavigator = () => {
         name={'Grid'}
         component={GridScreen}
         options={{ title: i18n.t('gridScreen.header') }}
+      />
+      <Stack.Screen
+        name={'Form'}
+        component={FormScreen}
+        options={{ title: i18n.t('formScreen.header') }}
+      />
+      <Stack.Screen
+        name={'Map'}
+        component={MapScreen}
+        options={{ title: i18n.t('mapScreen.header') }}
+      />
+      <Stack.Screen
+        name={'Website'}
+        component={WebsiteScreen}
+        options={{ title: i18n.t('websiteScreen.header') }}
       />
     </Stack.Navigator>
   );

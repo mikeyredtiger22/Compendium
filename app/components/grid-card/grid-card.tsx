@@ -11,10 +11,12 @@ import { typography } from '../../theme/typography';
 import { Button } from '../button/button';
 import { Text } from '../text/text';
 import { getMockImageUrl } from '../mock-image';
+import { useNavigation } from '@react-navigation/native';
 
 export interface GridCardProps {
   title: string;
-  index?: number;
+  screenNavigationName: string;
+  index: number;
 }
 
 export function GridCard(props: GridCardProps) {
@@ -24,10 +26,13 @@ export function GridCard(props: GridCardProps) {
     height: 370,
     index: props.index,
   });
-  // const navigation = useNavigation()
-  // const openGridItem = () => navigation.navigate("GridScreen", { title })
+  const navigation = useNavigation();
   return (
-    <Button preset={'blank'} style={styles.ROOT} /* onPress={openGridItem} */>
+    <Button
+      preset={'blank'}
+      style={styles.ROOT}
+      onPress={() => navigation.navigate(props.screenNavigationName)}
+    >
       <ImageBackground
         source={{ uri }}
         style={styles.IMAGE_CONTAINER}
