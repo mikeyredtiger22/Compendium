@@ -1,14 +1,14 @@
-import * as firebase from "firebase";
-import Constants from "expo-constants";
-import { Form } from "../../components";
+import * as firebase from 'firebase';
+import Constants from 'expo-constants';
+import { Form } from '../../components/saved-forms/saved-forms';
 
 function formData() {
   return firebase
     .database()
-    .ref("userData")
+    .ref('userData')
     .child(Constants.installationId)
-    .child("saved")
-    .child("forms");
+    .child('saved')
+    .child('forms');
 }
 /*
   add new form
@@ -26,32 +26,38 @@ export function addForm(form: Form) {
 export function editForm(formId: string, form: Form) {
   formData()
     .child(formId)
-    .set(form);
+    .set(form)
+    .catch(e => {
+      console.error('mpf Error editing form in firebase: ', e);
+    });
 }
 
 export function deleteForm(formId: string) {
   formData()
     .child(formId)
-    .remove();
+    .remove()
+    .catch(e => {
+      console.error('mpf Error deleting form from firebase: ', e);
+    });
 }
 
 export async function getForm(formId: string): Promise<Form> {
   const snapshot = await formData()
     .child(formId)
-    .once("value");
+    .once('value');
   return snapshot.val();
 }
 
 export function listenToAllForms(
   callback: (forms: { [name: string]: Form }) => void,
 ) {
-  formData().on("value", snapshot => {
-    callback(snapshot.val());
+  formData().on('value', snapshot => {
+    callback(snapshot.val() ?? {});
   });
 }
 
 export function stopListenToAllForms() {
-  formData().off("value");
+  formData().off('value');
 }
 
 // TypeScript type guard: https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards

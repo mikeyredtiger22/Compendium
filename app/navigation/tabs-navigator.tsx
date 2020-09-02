@@ -4,22 +4,21 @@
  *
  * You'll likely spend most of your time in this file.
  */
-import React, { FunctionComponent } from "react";
-import {
-  ArticleDetailScreen,
-  ContentScreen,
-  FormScreen,
-  GridScreen,
-  MapScreen,
-  WebsiteScreen,
-} from "../screens";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import * as Icons from "@expo/vector-icons";
-import { color } from "../theme";
-import { createStackNavigator } from "@react-navigation/stack";
-import { Button, Form } from "../components";
-import { ViewStyle } from "react-native";
-import { Article } from "../models/article/article";
+import React, { FunctionComponent } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as Icons from '@expo/vector-icons';
+import { color } from '../theme/color';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '../components/button/button';
+import { ViewStyle } from 'react-native';
+import { Article } from '../models/article/article';
+import { Form } from '../components/saved-forms/saved-forms';
+import { ContentScreen } from '../screens/content-screen';
+import { GridScreen } from '../screens/grid-screen';
+import { FormScreen } from '../screens/form-screen';
+import { MapScreen } from '../screens/map-screen';
+import { WebsiteScreen } from '../screens/website-screen';
+import { ArticleDetailScreen } from '../screens/article-detail-screen';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -33,7 +32,7 @@ import { Article } from "../models/article/article";
  *   https://reactnavigation.org/docs/params/
  *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
  */
-export type PrimaryParamList = {
+export type ScreenNavigationParameters = {
   Content: undefined;
   Grid: undefined;
   Form: {
@@ -49,15 +48,7 @@ export type PrimaryParamList = {
   };
 };
 
-const Tab = createBottomTabNavigator<PrimaryParamList>();
-
-// const defaultNavOptions={
-//   title: 'My home',
-//   headerTintColor: palette.darkBlue,
-//   headerStyle: {
-//     backgroundColor: palette.yellow,
-//   }
-// };
+const Tab = createBottomTabNavigator<ScreenNavigationParameters>();
 
 export function TabsNavigator(props) {
   return (
@@ -72,24 +63,24 @@ export function TabsNavigator(props) {
       })}
     >
       <Tab.Screen
-        name="Content"
-        component={getStackScreen("Content", ContentScreen, props.navigation)}
+        name='Content'
+        component={getStackScreen('Content', ContentScreen, props.navigation)}
       />
       <Tab.Screen
-        name="Grid"
-        component={getStackScreen("Grid", GridScreen, props.navigation)}
+        name='Grid'
+        component={getStackScreen('Grid', GridScreen, props.navigation)}
       />
       <Tab.Screen
-        name="Form"
-        component={getStackScreen("Form", FormScreen, props.navigation)}
+        name='Form'
+        component={getStackScreen('Form', FormScreen, props.navigation)}
       />
       <Tab.Screen
-        name="Map"
-        component={getStackScreen("Map", MapScreen, props.navigation)}
+        name='Map'
+        component={getStackScreen('Map', MapScreen, props.navigation)}
       />
       <Tab.Screen
-        name="Website"
-        component={getStackScreen("Website", WebsiteScreen, props.navigation)}
+        name='Website'
+        component={getStackScreen('Website', WebsiteScreen, props.navigation)}
       />
     </Tab.Navigator>
   );
@@ -118,14 +109,14 @@ function getStackScreen(
       >
         <Stack.Screen name={title} component={component} options={{ title }} />
         {/* Extra Content tab screens added to navigation stack */}
-        {title === "Content" && (
+        {title === 'Content' && (
           <Stack.Screen
-            name={"ArticleDetail"}
+            name={'ArticleDetail'}
             component={ArticleDetailScreen}
           />
         )}
-        {title === "Content" && (
-          <Stack.Screen name={"FormEdit"} component={FormScreen} />
+        {title === 'Content' && (
+          <Stack.Screen name={'FormEdit'} component={FormScreen} />
         )}
       </Stack.Navigator>
     );
@@ -134,62 +125,62 @@ function getStackScreen(
 
 const getTabIcon = (screenName: string, focused, color, size) => {
   switch (screenName) {
-    case "Content":
+    case 'Content':
       return (
         <Icons.FontAwesome5
-          name={focused ? "list-alt" : "list-ul"}
+          name={focused ? 'list-alt' : 'list-ul'}
           size={focused ? size : size * (15 / 24)}
           color={color}
         />
       );
-    case "Grid":
+    case 'Grid':
       return focused ? (
-        <Icons.Entypo name={"grid"} size={size * 1.25} color={color} />
+        <Icons.Entypo name={'grid'} size={size * 1.25} color={color} />
       ) : (
-        <Icons.Feather name={"grid"} size={size} color={color} />
+        <Icons.Feather name={'grid'} size={size} color={color} />
       );
-    case "Form":
+    case 'Form':
       return (
         <Icons.MaterialIcons
-          name={focused ? "person" : "person-outline"}
+          name={focused ? 'person' : 'person-outline'}
           size={size}
           color={color}
         />
       );
-    case "Map":
+    case 'Map':
       return focused ? (
-        <Icons.FontAwesome5 name={"map-marked-alt"} size={size} color={color} />
+        <Icons.FontAwesome5 name={'map-marked-alt'} size={size} color={color} />
       ) : (
         <Icons.FontAwesome5 // eslint-disable-next-line react-native/no-inline-styles
           style={{ paddingTop: 6 }}
-          name={"map"}
+          name={'map'}
           size={size}
           color={color}
         />
       );
-    case "Website":
+    case 'Website':
       return focused ? (
-        <Icons.FontAwesome5 name={"globe"} size={size} color={color} />
+        <Icons.FontAwesome5 name={'globe'} size={size} color={color} />
       ) : (
-        <Icons.SimpleLineIcons name={"globe"} size={size} color={color} />
+        <Icons.SimpleLineIcons name={'globe'} size={size} color={color} />
       );
     default:
       return (
-        <Icons.FontAwesome5 name={"times-circle"} size={size} color={color} />
+        <Icons.FontAwesome5 name={'times-circle'} size={size} color={color} />
       );
   }
 };
 const drawerOpenIcon = navigation => {
   return (
     <Button style={OPEN_DRAWER_BUTTON} onPress={() => navigation.openDrawer()}>
-      <Icons.FontAwesome5 name="bars" color={color.palette.white} size={20} />
+      <Icons.FontAwesome5 name='bars' color={color.palette.white} size={20} />
     </Button>
   );
 };
 
 const OPEN_DRAWER_BUTTON: ViewStyle = {
   paddingHorizontal: 15,
-  backgroundColor: "transparent",
+  backgroundColor: 'transparent',
 };
 
 /**
@@ -201,5 +192,5 @@ const OPEN_DRAWER_BUTTON: ViewStyle = {
  *
  * `canExit` is used in ./app/app.tsx in the `useBackButtonHandler` hook.
  */
-const exitRoutes = ["welcome"];
+const exitRoutes = ['welcome'];
 export const canExit = (routeName: string) => exitRoutes.includes(routeName);

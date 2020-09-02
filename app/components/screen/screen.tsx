@@ -1,15 +1,15 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   StatusBar,
   View,
-} from "react-native";
-import { ScreenProps } from "./screen.props";
-import { isNonScrolling, offsets, presets } from "./screen.presets";
+} from 'react-native';
+import { ScreenProps } from './screen.props';
+import { isNonScrolling, offsets, presets } from './screen.presets';
 
-const isIos = Platform.OS === "ios";
+const isIos = Platform.OS === 'ios';
 
 function ScreenWithoutScrolling(props: ScreenProps) {
   const preset = presets.fixed;
@@ -21,10 +21,10 @@ function ScreenWithoutScrolling(props: ScreenProps) {
   return (
     <KeyboardAvoidingView
       style={[preset.outer, backgroundStyle]}
-      behavior={isIos ? "padding" : null}
-      keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
+      behavior={isIos ? 'padding' : null}
+      keyboardVerticalOffset={offsets[props.keyboardOffset || 'none']}
     >
-      <StatusBar barStyle={props.statusBar || "light-content"} />
+      <StatusBar barStyle={props.statusBar || 'light-content'} />
       <View style={[preset.inner, style]}>{props.children}</View>
     </KeyboardAvoidingView>
   );
@@ -40,10 +40,10 @@ function ScreenWithScrolling(props: ScreenProps) {
   return (
     <KeyboardAvoidingView
       style={[preset.outer, backgroundStyle]}
-      behavior={isIos ? "padding" : null}
-      keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
+      behavior={isIos ? 'padding' : null}
+      keyboardVerticalOffset={offsets[props.keyboardOffset || 'none']}
     >
-      <StatusBar barStyle={props.statusBar || "light-content"} />
+      <StatusBar barStyle={props.statusBar || 'light-content'} />
       <View style={[preset.outer, backgroundStyle]}>
         <ScrollView
           style={[preset.outer, backgroundStyle]}

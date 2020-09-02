@@ -1,30 +1,31 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Dimensions,
   ImageStyle,
   TextStyle,
   View,
   ViewStyle,
-} from "react-native";
-import { spacing } from "../../theme";
-import { Button, Text } from "..";
-import { Article } from "../../models/article/article";
-import { useNavigation } from "@react-navigation/native";
-import { MockImage } from "../mock-image";
-import * as Icons from "@expo/vector-icons";
-import { useEffect, useState } from "react";
+} from 'react-native';
+import { spacing } from '../../theme/spacing';
+import { Button } from '../button/button';
+import { Text } from '../text/text';
+import { Article } from '../../models/article/article';
+import { useNavigation } from '@react-navigation/native';
+import { MockImage } from '../mock-image';
+import * as Icons from '@expo/vector-icons';
+import { useEffect, useState } from 'react';
 import {
   listenToArticleFavourited,
   stopListenToArticleFavourited,
   toggleFavouriteArticle,
-} from "../../services/database/articles";
+} from '../../services/database/articles';
 
 export interface ContentCardProps {
   item: Article;
   index: number;
 }
 
-const screenWidth = Math.round(Dimensions.get("window").width);
+const screenWidth = Math.round(Dimensions.get('window').width);
 
 export const setupArticleFavouriting = (props, favourited, setFavourited) => {
   // setup firebase listener
@@ -53,18 +54,18 @@ export function ContentCard(props: ContentCardProps) {
   const { item, index } = props;
   const navigation = useNavigation();
   const openArticle = () =>
-    navigation.navigate("ArticleDetail", { item, index });
+    navigation.navigate('ArticleDetail', { item, index });
 
   const [favourited, setFavourited] = useState(null);
   setupArticleFavouriting(props, favourited, setFavourited);
 
   return (
-    <Button preset={"blank"} style={styles.ROOT} onPress={openArticle}>
+    <Button preset={'blank'} style={styles.ROOT} onPress={openArticle}>
       <MockImage width={588} height={200} index={index} style={styles.IMAGE} />
       <View style={styles.TEXT_CONTAINER}>
         <View style={styles.TOP_ROW_CONTAINER}>
           <Text
-            preset={"cardHeader"}
+            preset={'cardHeader'}
             style={styles.TITLE}
             numberOfLines={2}
             capitalise
@@ -72,17 +73,17 @@ export function ContentCard(props: ContentCardProps) {
             {item.title}
           </Text>
           {/* Show icon only if favourited field exists */}
-          {typeof favourited === "boolean" && (
+          {typeof favourited === 'boolean' && (
             <Icons.AntDesign
               style={styles.FAVOURITE_ICON}
-              name={favourited ? "heart" : "hearto"}
+              name={favourited ? 'heart' : 'hearto'}
               size={20}
-              color={"red"}
+              color={'red'}
               onPress={() => toggleFavouriteArticle(item.id)}
             />
           )}
         </View>
-        <Text preset={"thin"}>{item.content}</Text>
+        <Text preset={'thin'}>{item.content}</Text>
       </View>
     </Button>
   );
@@ -90,21 +91,21 @@ export function ContentCard(props: ContentCardProps) {
 
 const styles = {
   ROOT: {
-    backgroundColor: "#f3f3f3",
-    borderColor: "#cccccc",
+    backgroundColor: '#f3f3f3',
+    borderColor: '#cccccc',
     marginHorizontal: 10,
     marginBottom: 20,
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 0.5,
     elevation: 10,
-    shadowColor: "rgba(0, 0, 0, 0.15)",
+    shadowColor: 'rgba(0, 0, 0, 0.15)',
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 1,
     shadowRadius: 8,
   } as ViewStyle,
   IMAGE: {
-    alignSelf: "center",
+    alignSelf: 'center',
     width: screenWidth - 170,
     height: 100,
     borderTopLeftRadius: 7,
@@ -115,12 +116,12 @@ const styles = {
   } as TextStyle,
   TEXT_CONTAINER: {
     borderRadius: 8,
-    backgroundColor: "#f3f3f3",
-    overflow: "hidden",
+    backgroundColor: '#f3f3f3',
+    overflow: 'hidden',
     padding: spacing[4],
   } as ViewStyle,
   TOP_ROW_CONTAINER: {
-    flexDirection: "row",
+    flexDirection: 'row',
   } as ViewStyle,
   FAVOURITE_ICON: {
     paddingLeft: 8,

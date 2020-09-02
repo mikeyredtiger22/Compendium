@@ -1,9 +1,9 @@
-import { Instance, SnapshotOut, types } from "mobx-state-tree";
+import { Instance, SnapshotOut, types } from 'mobx-state-tree';
 
 /**
  * Model description here for TypeScript hints.
  */
-export const ArticleModel = types.model("Article").props({
+export const ArticleModel = types.model('Article').props({
   id: types.string,
   title: types.string,
   content: types.string,

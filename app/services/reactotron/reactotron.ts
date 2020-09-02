@@ -1,14 +1,14 @@
-import Tron from "reactotron-react-native";
-import { AsyncStorage } from "react-native";
-import { RootStore } from "../../models/root-store/root-store";
-import { onSnapshot } from "mobx-state-tree";
+import Tron from 'reactotron-react-native';
+import { AsyncStorage } from 'react-native';
+import { RootStore } from '../../models/root-store/root-store';
+import { onSnapshot } from 'mobx-state-tree';
 import {
   ReactotronConfig,
   DEFAULT_REACTOTRON_CONFIG,
-} from "./reactotron-config";
-import { mst } from "reactotron-mst";
-import { clear } from "../../utils/storage";
-import { RootNavigation } from "../../navigation";
+} from './reactotron-config';
+import { mst } from 'reactotron-mst';
+import { clear } from '../../utils/storage';
+import { RootNavigation } from '../../navigation/navigation-utilities';
 
 // Teach TypeScript about the bad things we want to do.
 declare global {
@@ -69,7 +69,7 @@ export class Reactotron {
   constructor(config: ReactotronConfig = DEFAULT_REACTOTRON_CONFIG) {
     // merge the passed in config with some defaults
     this.config = {
-      host: "localhost",
+      host: 'localhost',
       useAsyncStorage: true,
       ...config,
       state: {
@@ -91,20 +91,20 @@ export class Reactotron {
       this.rootStore = rootStore;
 
       const { initial, snapshots } = this.config.state;
-      const name = "ROOT STORE";
+      const name = 'ROOT STORE';
 
       // logging features
       if (initial) {
         console.tron.display({
           name,
           value: initialData,
-          preview: "Initial State",
+          preview: 'Initial State',
         });
       }
       // log state changes?
       if (snapshots) {
         onSnapshot(rootStore, snapshot => {
-          console.tron.display({ name, value: snapshot, preview: "New State" });
+          console.tron.display({ name, value: snapshot, preview: 'New State' });
         });
       }
 
@@ -121,7 +121,7 @@ export class Reactotron {
     if (__DEV__) {
       // configure reactotron
       Tron.configure({
-        name: this.config.name || require("../../../package.json").name,
+        name: this.config.name || require('../../../package.json').name,
         host: this.config.host,
       });
 
@@ -148,31 +148,31 @@ export class Reactotron {
 
       // Register Custom Commands
       Tron.onCustomCommand({
-        title: "Reset Root Store",
-        description: "Resets the MST store",
-        command: "resetStore",
+        title: 'Reset Root Store',
+        description: 'Resets the MST store',
+        command: 'resetStore',
         handler: () => {
-          console.tron.log("resetting store");
+          console.tron.log('resetting store');
           clear();
         },
       });
 
       Tron.onCustomCommand({
-        title: "Reset Navigation State",
-        description: "Resets the navigation state",
-        command: "resetNavigation",
+        title: 'Reset Navigation State',
+        description: 'Resets the navigation state',
+        command: 'resetNavigation',
         handler: () => {
-          console.tron.log("resetting navigation state");
+          console.tron.log('resetting navigation state');
           RootNavigation.resetRoot({ routes: [] });
         },
       });
 
       Tron.onCustomCommand({
-        title: "Go Back",
-        description: "Goes back",
-        command: "goBack",
+        title: 'Go Back',
+        description: 'Goes back',
+        command: 'goBack',
         handler: () => {
-          console.tron.log("Going back");
+          console.tron.log('Going back');
           RootNavigation.goBack();
         },
       });

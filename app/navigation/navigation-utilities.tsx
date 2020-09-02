@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { BackHandler } from "react-native";
+import React, { useState, useEffect, useRef } from 'react';
+import { BackHandler } from 'react-native';
 import {
   PartialState,
   NavigationState,
   NavigationContainerRef,
-} from "@react-navigation/native";
+} from '@react-navigation/native';
 
 export const RootNavigation = {
   navigate(name: string) {
@@ -87,11 +87,11 @@ export function useBackButtonHandler(
     };
 
     // Subscribe when we come to life
-    BackHandler.addEventListener("hardwareBackPress", onBackPress);
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
     // Unsubscribe when we're done
     return () =>
-      BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
   }, [ref]);
 }
 

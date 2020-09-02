@@ -1,5 +1,7 @@
-import { TextStyle } from "react-native";
-import { color, spacing, typography } from "../../theme";
+import { TextStyle } from 'react-native';
+import { color } from '../../theme/color';
+import { spacing } from '../../theme/spacing';
+import { typography } from '../../theme/typography';
 
 /**
  * All text will start off looking like this.
@@ -39,7 +41,7 @@ export const presets = {
   /**
    * A bold version of the default text.
    */
-  bold: { ...BASE, fontWeight: "bold" } as TextStyle,
+  bold: { ...BASE, fontWeight: 'bold' } as TextStyle,
 
   /**
    * Field labels that appear on forms above the inputs.

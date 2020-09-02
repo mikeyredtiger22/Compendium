@@ -1,21 +1,21 @@
-import React, { FunctionComponent as Component, useRef, useState } from "react";
-import { Dimensions, ViewStyle } from "react-native";
-import { ContentCard } from "../";
-import * as SnapCarousel from "react-native-snap-carousel";
-import { useObserver } from "mobx-react-lite";
-import { Article } from "../../models/article/article";
-import { color } from "../../theme";
-import { AdditionalParallaxProps } from "react-native-snap-carousel";
+import React, { FunctionComponent as Component, useRef, useState } from 'react';
+import { Dimensions, ViewStyle } from 'react-native';
+import { ContentCard } from '../content-card/content-card';
+import * as SnapCarousel from 'react-native-snap-carousel';
+import { useObserver } from 'mobx-react-lite';
+import { Article } from '../../models/article/article';
+import { color } from '../../theme/color';
+import { AdditionalParallaxProps } from 'react-native-snap-carousel';
 
 export interface CarouselProps {
-  data: Array<any>;
+  data: ReadonlyArray<Article>;
   renderItem?: (
     item: { item: any; index: number },
     parallaxProps?: AdditionalParallaxProps,
   ) => React.ReactNode;
 }
 
-const screenWidth = Math.round(Dimensions.get("window").width);
+const screenWidth = Math.round(Dimensions.get('window').width);
 
 export const Carousel: Component<CarouselProps> = props => {
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -29,7 +29,7 @@ export const Carousel: Component<CarouselProps> = props => {
     <>
       <SnapCarousel.default
         ref={carouselRef}
-        layout={"default"}
+        layout={'default'}
         data={props.data}
         renderItem={props.renderItem || _defaultRenderItem}
         sliderWidth={screenWidth}

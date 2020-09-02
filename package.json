@@ -128,7 +128,9 @@
     ]
   },
   "prettier": {
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "singleQuote": true,
+    "jsxSingleQuote": true
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
@@ -173,7 +175,7 @@
       "comma-dangle": 0,
       "no-unused-vars": 0,
       "no-undef": 0,
-      "quotes": 0,
+      "quotes": "warn",
       "semi": "off",
       "no-unused-expressions": "off",
       "object-curly-spacing": 0,

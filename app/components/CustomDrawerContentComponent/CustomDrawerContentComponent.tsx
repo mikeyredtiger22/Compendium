@@ -1,20 +1,20 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   ImageStyle,
   Linking,
   SafeAreaView,
   View,
   ViewStyle,
-} from "react-native";
+} from 'react-native';
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
-} from "@react-navigation/drawer";
-import { flatten, mergeAll } from "ramda";
-import { color } from "../../theme";
-import { MockImage } from "../mock-image";
+} from '@react-navigation/drawer';
+import { flatten, mergeAll } from 'ramda';
+import { color } from '../../theme/color';
+import { MockImage } from '../mock-image';
 
 export function CustomDrawerContentComponent(
   props: DrawerContentComponentProps,
@@ -30,7 +30,7 @@ export function CustomDrawerContentComponent(
           width={560}
           height={400}
           style={DRAWER_HEADER_IMAGE}
-          resizeMode={"cover"}
+          resizeMode={'cover'}
         />
       </View>
       <SafeAreaView style={SAFE_AREA_VIEW_STYLE}>
@@ -42,8 +42,8 @@ export function CustomDrawerContentComponent(
         <View style={DRAWER_END_CONTAINER}>
           <DrawerItem
             style={DRAWER_ITEM}
-            label="Open Google"
-            onPress={() => Linking.openURL("https://www.google.com")}
+            label='Open Google'
+            onPress={() => Linking.openURL('https://www.google.com')}
           />
         </View>
       </SafeAreaView>
@@ -61,7 +61,7 @@ const DRAWER_HEADER: ViewStyle = {
 };
 const DRAWER_HEADER_IMAGE: ImageStyle = {
   height: 200,
-  width: "100%",
+  width: '100%',
   // aspectRatio: 1
 };
 const DRAWER_CONTAINER_STYLE: ViewStyle = {
@@ -70,7 +70,7 @@ const DRAWER_CONTAINER_STYLE: ViewStyle = {
 };
 const DRAWER_END_CONTAINER: ViewStyle = {
   flex: 1,
-  justifyContent: "flex-end",
+  justifyContent: 'flex-end',
 };
 const SAFE_AREA_VIEW_STYLE: ViewStyle = {
   flex: 1,

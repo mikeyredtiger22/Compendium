@@ -3,7 +3,7 @@ import React, {
   RefCallback,
   useEffect,
   useState,
-} from "react";
+} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -12,25 +12,27 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from "react-native";
-import { Button, Text } from "../components";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import DropDownPicker from "react-native-dropdown-picker";
-import { Feather } from "@expo/vector-icons";
-import { color, typography } from "../theme";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+} from 'react-native';
+import { Text } from '../components/text/text';
+import { Button } from '../components/button/button';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import DropDownPicker from 'react-native-dropdown-picker';
+import { Feather } from '@expo/vector-icons';
+import { color } from '../theme/color';
+import { typography } from '../theme/typography';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   Control,
   Controller,
   FieldError,
   useForm,
   ValidationRules,
-} from "react-hook-form";
-import { addForm, editForm, isFormType } from "../services/database/forms";
-import { StackScreenProps } from "@react-navigation/stack";
-import { PrimaryParamList } from "../navigation";
+} from 'react-hook-form';
+import { addForm, editForm, isFormType } from '../services/database/forms';
+import { StackScreenProps } from '@react-navigation/stack';
+import { ScreenNavigationParameters } from '../navigation/tabs-navigator';
 
-type Props = StackScreenProps<PrimaryParamList, "Form">;
+type Props = StackScreenProps<ScreenNavigationParameters, 'Form'>;
 
 export const FormScreen: Component<Props> = (props: Props) => {
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
@@ -61,8 +63,8 @@ export const FormScreen: Component<Props> = (props: Props) => {
     formState,
     setValue,
   } = useForm({
-    mode: "onBlur",
-    reValidateMode: "onChange",
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
   });
 
   // Populate form fields when editing.
@@ -84,27 +86,27 @@ export const FormScreen: Component<Props> = (props: Props) => {
 
   return (
     <KeyboardAwareScrollView style={SCROLL_VIEW}>
-      <Text preset="screenTitle" text="Form" />
+      <Text preset='screenTitle' text='Form' />
       <View style={FORM_CONTAINER}>
-        <Text text="Name" />
+        <Text text='Name' />
         <ValidatedTextInput
-          name={"name"}
-          placeholder={"John Smith"}
+          name={'name'}
+          placeholder={'John Smith'}
           control={control}
           error={errors.name}
           onSubmitEditing={() => {
             refEmail?.focus();
           }}
           rules={{
-            required: "Required!",
-            minLength: { value: 2, message: "Longer!" },
-            maxLength: { value: 100, message: "Shorter!" },
+            required: 'Required!',
+            minLength: { value: 2, message: 'Longer!' },
+            maxLength: { value: 100, message: 'Shorter!' },
           }}
         />
-        <Text text="Email" />
+        <Text text='Email' />
         <ValidatedTextInput
-          name={"email"}
-          placeholder={"john.s@gmail.com"}
+          name={'email'}
+          placeholder={'john.s@gmail.com'}
           control={control}
           error={errors.email}
           refCallback={ref => {
@@ -114,21 +116,21 @@ export const FormScreen: Component<Props> = (props: Props) => {
             refPhone?.focus();
           }}
           rules={{
-            required: "Required!",
-            maxLength: { value: 100, message: "Shorter!" },
+            required: 'Required!',
+            maxLength: { value: 100, message: 'Shorter!' },
             pattern: {
               value: RegExp(
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               ),
-              message: "Invalid email!",
+              message: 'Invalid email!',
             },
           }}
         />
-        <Text text="Phone Number" />
+        <Text text='Phone Number' />
         <ValidatedTextInput
-          name={"phone"}
-          placeholder={"0123456789"}
-          keyboardType={"number-pad"}
+          name={'phone'}
+          placeholder={'0123456789'}
+          keyboardType={'number-pad'}
           control={control}
           error={errors.phone}
           refCallback={ref => {
@@ -138,19 +140,19 @@ export const FormScreen: Component<Props> = (props: Props) => {
             refPassword?.focus();
           }}
           rules={{
-            required: "Required!",
-            minLength: { value: 9, message: "Longer!" },
-            maxLength: { value: 12, message: "Shorter!" },
+            required: 'Required!',
+            minLength: { value: 9, message: 'Longer!' },
+            maxLength: { value: 12, message: 'Shorter!' },
             pattern: {
-              value: RegExp(`^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- ()]*$`),
-              message: "Invalid phone number!",
+              value: RegExp('^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- ()]*$'),
+              message: 'Invalid phone number!',
             },
           }}
         />
-        <Text text="Password" />
+        <Text text='Password' />
         <ValidatedTextInput
-          name={"password"}
-          placeholder={"Password"}
+          name={'password'}
+          placeholder={'Password'}
           secureTextEntry
           control={control}
           error={errors.password}
@@ -161,54 +163,54 @@ export const FormScreen: Component<Props> = (props: Props) => {
             refDescription?.focus();
           }}
           rules={{
-            required: "Required!",
-            minLength: { value: 6, message: "Longer!" },
-            maxLength: { value: 50, message: "Shorter!" },
+            required: 'Required!',
+            minLength: { value: 6, message: 'Longer!' },
+            maxLength: { value: 50, message: 'Shorter!' },
           }}
         />
-        <Text text="Description" />
+        <Text text='Description' />
         <ValidatedTextInput
-          name={"description"}
-          placeholder={"Add a description here..."}
+          name={'description'}
+          placeholder={'Add a description here...'}
           large
-          returnKeyType={"default"}
+          returnKeyType={'default'}
           control={control}
           error={errors.description}
           refCallback={ref => {
             refDescription = ref;
           }}
           rules={{
-            maxLength: { value: 300, message: "Shorter!" },
+            maxLength: { value: 300, message: 'Shorter!' },
           }}
         />
-        <Text text="Date" />
+        <Text text='Date' />
         {dateError && (
-          <Text preset={"error"}>
-            {"Date must be at least 1 day in the future"}
+          <Text preset={'error'}>
+            {'Date must be at least 1 day in the future'}
           </Text>
         )}
-        <Button preset={"blank"} onPress={() => setShowDatePicker(true)}>
+        <Button preset={'blank'} onPress={() => setShowDatePicker(true)}>
           <TextInput
-            pointerEvents="none"
+            pointerEvents='none'
             style={[TEXT_INPUT, dateError ? TEXT_INPUT_ERROR : {}]}
-            placeholder={"12/12/2020"}
-            returnKeyType={"next"}
+            placeholder={'12/12/2020'}
+            returnKeyType={'next'}
             editable={false}
             value={date?.toDateString()}
           />
         </Button>
         <DateTimePickerModal
           isVisible={showDatePicker}
-          mode="date"
+          mode='date'
           onConfirm={onConfirmDate}
           onCancel={() => setShowDatePicker(false)}
         />
-        <Text text="Time" />
+        <Text text='Time' />
         <DropDownPicker
           showArrow
           placeholderStyle={DROPDOWN_PLACEHOLDER_TEXT}
-          placeholder="Select an item"
-          items={["Morning", "Noon", "Evening", "Night"].map(time => ({
+          placeholder='Select an item'
+          items={['Morning', 'Noon', 'Evening', 'Night'].map(time => ({
             label: time,
             value: time,
           }))}
@@ -217,24 +219,24 @@ export const FormScreen: Component<Props> = (props: Props) => {
           dropDownStyle={DROPDOWN_MENU}
           itemStyle={DROPDOWN_ITEM}
           customArrowUp={(size, color) => (
-            <Feather name="chevron-up" size={size} color={color} />
+            <Feather name='chevron-up' size={size} color={color} />
           )}
           customArrowDown={(size, color) => (
-            <Feather name="chevron-down" size={size} color={color} />
+            <Feather name='chevron-down' size={size} color={color} />
           )}
           onChangeItem={item => setTime(item.value)}
         />
         <Button
-          preset="blank"
+          preset='blank'
           onPress={() => setChecked(!checked)}
           style={CHECKBOX_CONTAINER}
         >
           <Feather
             style={CHECKBOX}
-            name={checked ? "check-square" : "square"}
+            name={checked ? 'check-square' : 'square'}
             size={18}
           />
-          <Text style={CHECKBOX_TEXT} text="I agree to checking this box." />
+          <Text style={CHECKBOX_TEXT} text='I agree to checking this box.' />
         </Button>
         <Button
           style={[
@@ -242,7 +244,7 @@ export const FormScreen: Component<Props> = (props: Props) => {
             !allFormDataIsValid ? SUBMIT_BUTTON_DISABLED : {},
           ]}
           textStyle={SUBMIT_BUTTON_TEXT}
-          text={"Submit"}
+          text={'Submit'}
           onPress={() => {
             // handleSubmit method validates all fields
             // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -294,8 +296,8 @@ const ValidatedTextInput = (props: ValidatedTextInputProps) => {
   return (
     <>
       {props.error && (
-        <Text preset={"error"}>
-          {props.error.message || "This is required."}
+        <Text preset={'error'}>
+          {props.error.message || 'This is required.'}
         </Text>
       )}
       <Controller
@@ -310,7 +312,7 @@ const ValidatedTextInput = (props: ValidatedTextInputProps) => {
               props.large ? TEXT_INPUT_LARGE : {},
             ]}
             ref={props.refCallback}
-            returnKeyType={"next"}
+            returnKeyType={'next'}
             blurOnSubmit={false}
             onBlur={onBlur}
             onChangeText={value => onChange(value)}
@@ -345,9 +347,9 @@ const TEXT_INPUT_ERROR: TextStyle = {
   borderWidth: 1,
 };
 const TEXT_INPUT_LARGE: TextStyle = {
-  textAlignVertical: "top",
+  textAlignVertical: 'top',
   minHeight: 80,
-  maxHeight: Platform.OS === "ios" ? 200 : undefined,
+  maxHeight: Platform.OS === 'ios' ? 200 : undefined,
   paddingTop: 10,
 };
 const DROPDOWN_FIELD: ViewStyle = {
@@ -359,14 +361,14 @@ const DROPDOWN_FIELD: ViewStyle = {
   borderBottomRightRadius: 6,
   borderBottomLeftRadius: 6,
   paddingHorizontal: 10,
-  paddingVertical: Platform.OS === "ios" ? 1.5 : 9,
+  paddingVertical: Platform.OS === 'ios' ? 1.5 : 9,
   backgroundColor: undefined,
   marginTop: 10,
   marginBottom: 15,
 };
 const DROPDOWN_MENU: ViewStyle = {
   // override default styles applied by library to match other fields
-  backgroundColor: "#fff",
+  backgroundColor: '#fff',
   borderBottomRightRadius: 6,
   borderBottomLeftRadius: 6,
   borderWidth: StyleSheet.hairlineWidth,
@@ -374,7 +376,7 @@ const DROPDOWN_MENU: ViewStyle = {
   marginTop: 10,
 };
 const DROPDOWN_ITEM: ViewStyle = {
-  justifyContent: "flex-start",
+  justifyContent: 'flex-start',
   borderBottomWidth: 1,
   borderBottomColor: color.palette.lighterGrey,
 };
@@ -382,8 +384,8 @@ const DROPDOWN_PLACEHOLDER_TEXT: TextStyle = {
   color: color.palette.lightGrey,
 };
 const CHECKBOX_CONTAINER: ViewStyle = {
-  justifyContent: "center",
-  flexDirection: "row",
+  justifyContent: 'center',
+  flexDirection: 'row',
   marginTop: 15,
   marginBottom: 5,
 };

@@ -1,9 +1,9 @@
-import * as React from "react";
-import { Text as ReactNativeText } from "react-native";
-import { presets } from "./text.presets";
-import { TextProps } from "./text.props";
-import { translate } from "../../i18n";
-import { mergeAll, flatten } from "ramda";
+import * as React from 'react';
+import { Text as ReactNativeText } from 'react-native';
+import { presets } from './text.presets';
+import { TextProps } from './text.props';
+import { translate } from '../../i18n';
+import { mergeAll, flatten } from 'ramda';
 
 /**
  * For your text displaying needs.
@@ -13,7 +13,7 @@ import { mergeAll, flatten } from "ramda";
 export function Text(props: TextProps) {
   // grab the props
   const {
-    preset = "default",
+    preset = 'default',
     tx,
     txOptions,
     text,
@@ -26,7 +26,7 @@ export function Text(props: TextProps) {
   // figure out which content to use
   const i18nText = tx && translate(tx, txOptions);
   const content = i18nText || text || children;
-  const caseStyle = capitalise ? { textTransform: "uppercase" } : {};
+  const caseStyle = capitalise ? { textTransform: 'uppercase' } : {};
 
   const style = mergeAll(
     flatten([presets[preset] || presets.default, caseStyle, styleOverride]),
