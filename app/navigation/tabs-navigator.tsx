@@ -13,7 +13,7 @@ import { Button } from '../components/button/button';
 import { ViewStyle } from 'react-native';
 import { Article } from '../models/article/article';
 import { Form } from '../components/saved-forms/saved-forms';
-import { ContentScreen } from '../screens/content-screen';
+import { IntroContentScreen } from '../screens/intro-content-screen';
 import { GridScreen } from '../screens/grid-screen';
 import { FormScreen } from '../screens/form-screen';
 import { MapScreen } from '../screens/map-screen';
@@ -64,7 +64,11 @@ export function TabsNavigator(props) {
     >
       <Tab.Screen
         name='Content'
-        component={getStackScreen('Content', ContentScreen, props.navigation)}
+        component={getStackScreen(
+          'Content',
+          IntroContentScreen,
+          props.navigation,
+        )}
       />
       <Tab.Screen
         name='Grid'
@@ -170,6 +174,7 @@ const getTabIcon = (screenName: string, focused, color, size) => {
       );
   }
 };
+
 const drawerOpenIcon = navigation => {
   return (
     <Button style={OPEN_DRAWER_BUTTON} onPress={() => navigation.openDrawer()}>

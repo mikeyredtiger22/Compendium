@@ -14,7 +14,7 @@ import {
 } from '@react-navigation/drawer';
 import { flatten, mergeAll } from 'ramda';
 import { color } from '../../theme/color';
-import { MockImage } from '../mock-image';
+import { MockImage } from '../../components/mock-image';
 
 export function CustomDrawerContentComponent(
   props: DrawerContentComponentProps,

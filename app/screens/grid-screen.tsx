@@ -22,7 +22,7 @@ const mockGridData = [
 export const GridScreen: Component = observer(function GridScreen() {
   return (
     <Screen preset='scroll'>
-      <Text preset='screenTitle' text='Grid' />
+      <Text preset='screenTitle' tx='gridScreen.title' />
       <FlatGrid
         pointerEvents={'none'}
         scrollEnabled={false}

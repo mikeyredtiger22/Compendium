@@ -1,7 +1,12 @@
 {
-  "common": {
-    "ok": "OK!",
-    "cancel": "Cancel",
-    "back": "Back"
+  "introContentScreen": {
+    "header": "Compendium",
+    "title": "Why does every business need a mobile app?",
+    "faqs": "FAQs about this app",
+    "openApps": "See all example apps"
+  },
+  "gridScreen": {
+    "header": "Example Apps",
+    "title": "Select an example app:"
   }
 }

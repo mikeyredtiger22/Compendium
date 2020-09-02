@@ -9,21 +9,43 @@ import {
   NavigationContainer,
   NavigationContainerRef,
 } from '@react-navigation/native';
-import { TabsNavigator } from './tabs-navigator';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { CustomDrawerContentComponent } from '../components/CustomDrawerContentComponent/CustomDrawerContentComponent';
-const Drawer = createDrawerNavigator();
+import i18n from 'i18n-js';
+import { createStackNavigator } from '@react-navigation/stack';
+import { color } from '../theme/color';
+import { IntroContentScreen } from '../screens/intro-content-screen';
+import { typography } from '../theme/typography';
+import { ArticleDetailScreen } from '../screens/article-detail-screen';
+import { GridScreen } from '../screens/grid-screen';
 
-const RootDrawerNavigator = () => {
+const Stack = createStackNavigator();
+
+const RootStackNavigator = () => {
   return (
-    <Drawer.Navigator
-      initialRouteName='Home'
-      drawerPosition={'right'}
-      drawerContent={CustomDrawerContentComponent}
+    <Stack.Navigator
+      initialRouteName='IntroContent'
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: color.palette.darkBlue,
+        },
+        headerTintColor: color.palette.white,
+        headerTitleStyle: {
+          fontSize: 25,
+          fontFamily: typography.museo,
+        },
+      }}
     >
-      <Drawer.Screen name='Home' component={TabsNavigator} />
-      <Drawer.Screen name='Settings' component={TabsNavigator} />
-    </Drawer.Navigator>
+      <Stack.Screen
+        name='IntroContent'
+        component={IntroContentScreen}
+        options={{ title: i18n.t('intoContentScreen.header') }}
+      />
+      <Stack.Screen name={'ArticleDetail'} component={ArticleDetailScreen} />
+      <Stack.Screen
+        name={'Grid'}
+        component={GridScreen}
+        options={{ title: i18n.t('gridScreen.header') }}
+      />
+    </Stack.Navigator>
   );
 };
 
@@ -33,7 +55,7 @@ export const RootNavigator = React.forwardRef<
 >((props, ref) => {
   return (
     <NavigationContainer {...props} ref={ref}>
-      <RootDrawerNavigator />
+      <RootStackNavigator />
     </NavigationContainer>
   );
 });

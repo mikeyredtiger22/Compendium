@@ -25,11 +25,23 @@ export const presets = {
   error: {
     color: color.palette.error,
   } as TextStyle,
+  button: {
+    ...BASE,
+    color: color.palette.white,
+    fontSize: 20,
+  } as TextStyle,
   screenTitle: {
     ...BASE,
     fontSize: 35,
     paddingVertical: 10,
     paddingHorizontal: 20,
+  } as TextStyle,
+  underlineCta: {
+    ...BASE,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    textDecorationLine: 'underline',
+    fontSize: 19,
   } as TextStyle,
   cardHeader: {
     ...BASE,

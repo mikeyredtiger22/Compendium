@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { Text } from '../text/text';
 import { mergeAll, flatten } from 'ramda';
-import { presets } from '../text/text.presets';
+import { presets, TextPresets } from '../text/text.presets';
 import { spacing } from '../../theme/spacing';
 import { color } from '../../theme/color';
 
@@ -22,24 +22,10 @@ export interface ButtonProps extends TouchableOpacityProps {
    */
   text?: string;
 
-  /**
-   * An optional style override useful for padding & margin.
-   */
   style?: ViewStyle | ViewStyle[];
-
-  /**
-   * An optional style override useful for the button text.
-   */
   textStyle?: TextStyle | TextStyle[];
-
-  /**
-   * One of the different types of text presets.
-   */
   preset?: ButtonPresetNames;
-
-  /**
-   * One of the different types of text presets.
-   */
+  textPreset?: TextPresets;
   children?: React.ReactNode;
 }
 
@@ -52,6 +38,7 @@ export function Button(props: ButtonProps) {
   // grab the props
   const {
     preset = 'primary',
+    textPreset = 'button',
     tx,
     text,
     style: styleOverride,
@@ -64,7 +51,7 @@ export function Button(props: ButtonProps) {
     flatten([viewPresets[preset] || viewPresets.primary, styleOverride]),
   );
   const textStyle = mergeAll(
-    flatten([presets[preset] || presets.default, textStyleOverride]),
+    flatten([presets[textPreset] || presets.default, textStyleOverride]),
   );
 
   const content = children || <Text tx={tx} text={text} style={textStyle} />;
@@ -80,9 +67,9 @@ export function Button(props: ButtonProps) {
  * All text will start off looking like this.
  */
 const BASE_VIEW: ViewStyle = {
-  paddingVertical: spacing[2],
-  paddingHorizontal: spacing[2],
-  borderRadius: 4,
+  paddingVertical: 15,
+  paddingHorizontal: 8,
+  borderRadius: 8,
   justifyContent: 'center',
   alignItems: 'center',
 };
