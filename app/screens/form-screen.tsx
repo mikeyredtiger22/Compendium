@@ -36,9 +36,9 @@ type Props = StackScreenProps<ScreenNavigationParameters, 'Form'>;
 
 export const FormScreen: Component<Props> = (props: Props) => {
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
-  const [date, setDate] = useState<Date>(null);
-  const [time, setTime] = useState<string>(null);
-  const [checked, setChecked] = useState<boolean>(false);
+  const [date, setDate] = useState<Date | null>(null);
+  const [time, setTime] = useState<string | null>(null);
+  const [checked, setChecked] = useState<boolean | null>(false);
 
   const dateError =
     date &&

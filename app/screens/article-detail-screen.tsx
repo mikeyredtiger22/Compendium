@@ -20,8 +20,8 @@ export const ArticleDetailScreen: Component = observer(
       index,
     }: { item: Article; index?: number } = props.route.params;
 
-    const [favourited, setFavourited] = useState(null);
-    setupArticleFavouriting(props.route.params, favourited, setFavourited);
+    const [favourited, setFavourited] = useState<boolean | null>(null);
+    setupArticleFavouriting(item.id, favourited, setFavourited);
 
     return (
       <Screen preset='scroll'>

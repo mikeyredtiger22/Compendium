@@ -27,13 +27,17 @@ export interface ContentCardProps {
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-export const setupArticleFavouriting = (props, favourited, setFavourited) => {
+export const setupArticleFavouriting = (
+  itemId: string,
+  favourited: boolean,
+  setFavourited: (boolean) => void,
+) => {
   // setup firebase listener
-  useEffect(() => listenToArticleFavourited(props.item.id, updateArticle), []);
+  useEffect(() => listenToArticleFavourited(itemId, updateArticle), []);
   // tear down firebase listener
   useEffect(() => {
     return () => {
-      stopListenToArticleFavourited(props.item.id);
+      stopListenToArticleFavourited(itemId);
     };
   }, []);
 
@@ -56,8 +60,8 @@ export function ContentCard(props: ContentCardProps) {
   const openArticle = () =>
     navigation.navigate('ArticleDetail', { item, index });
 
-  const [favourited, setFavourited] = useState(null);
-  setupArticleFavouriting(props, favourited, setFavourited);
+  const [favourited, setFavourited] = useState<boolean | null>(null);
+  setupArticleFavouriting(props.item.id, favourited, setFavourited);
 
   return (
     <Button preset={'blank'} style={styles.ROOT} onPress={openArticle}>

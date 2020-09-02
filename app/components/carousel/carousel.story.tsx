@@ -13,22 +13,27 @@ storiesOf('Carousel', module)
         <Carousel
           data={[
             {
+              id: '1',
               title: 'Article 1: Stunning Landscape Images',
               content: 'Press for more info',
             },
             {
+              id: '2',
               title: 'Article 2: Stunning Landscape Images',
               content: 'Press for more info',
             },
             {
+              id: '3',
               title: 'Article 3: Stunning Landscape Images',
               content: 'Press for more info',
             },
             {
+              id: '4',
               title: 'Article 4: Stunning Landscape Images',
               content: 'Press for more info',
             },
             {
+              id: '5',
               title: 'Article 5: Stunning Landscape Images',
               content: 'Press for more info',
             },
