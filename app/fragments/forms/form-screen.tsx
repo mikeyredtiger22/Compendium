@@ -13,13 +13,13 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { Text } from '../components/text/text';
-import { Button } from '../components/button/button';
+import { Text } from '../../components/text/text';
+import { Button } from '../../components/button/button';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Feather } from '@expo/vector-icons';
-import { color } from '../theme/color';
-import { typography } from '../theme/typography';
+import { color } from '../../theme/color';
+import { typography } from '../../theme/typography';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   Control,
@@ -28,9 +28,9 @@ import {
   useForm,
   ValidationRules,
 } from 'react-hook-form';
-import { addForm, editForm, isFormType } from '../services/database/forms';
+import { addForm, editForm, isFormType } from './forms-database';
 import { StackScreenProps } from '@react-navigation/stack';
-import { ScreenNavigationParameters } from '../navigation/tabs-navigator';
+import { ScreenNavigationParameters } from '../../navigation/tabs-navigator';
 
 type Props = StackScreenProps<ScreenNavigationParameters, 'Form'>;
 

@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 import Constants from 'expo-constants';
-import { Form } from '../../components/saved-forms/saved-forms';
+import { Form } from './saved-forms/saved-forms';
 
 function formData() {
   return firebase

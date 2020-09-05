@@ -5,7 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { ScreenNavigationParameters } from '../navigation/tabs-navigator';
 import { MockImage } from '../components/mock-image';
 import * as Icons from '@expo/vector-icons';
-import { toggleFavouriteArticle } from '../services/database/articles';
+import { toggleFavouriteArticle } from '../fragments/articles/articles-database';
 import { setupArticleFavouriting } from '../fragments/articles/content-card/content-card';
 import { Screen } from '../components/screen/screen';
 import { Text } from '../components/text/text';

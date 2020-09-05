@@ -17,7 +17,7 @@ import {
   listenToArticleFavourited,
   stopListenToArticleFavourited,
   toggleFavouriteArticle,
-} from '../../../services/database/articles';
+} from '../articles-database';
 import { Article } from '../articleData';
 
 export interface ContentCardProps {

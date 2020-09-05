@@ -16,7 +16,7 @@ import { IntroContentScreen } from '../screens/intro-content-screen';
 import { typography } from '../theme/typography';
 import { ArticleDetailScreen } from '../screens/article-detail-screen';
 import { GridScreen } from '../screens/grid-screen';
-import { FormScreen } from '../screens/form-screen';
+import { FormScreen } from '../fragments/forms/form-screen';
 import { MapScreen } from '../screens/map-screen';
 import { WebsiteScreen } from '../screens/website-screen';
 

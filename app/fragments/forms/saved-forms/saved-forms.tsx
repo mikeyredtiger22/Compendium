@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { TextStyle, View, ViewStyle } from 'react-native';
-import { Button } from '../button/button';
-import { Text } from '../text/text';
+import { Button } from '../../../components/button/button';
+import { Text } from '../../../components/text/text';
 import {
   deleteForm,
   listenToAllForms,
   stopListenToAllForms,
-} from '../../services/database/forms';
+} from '../forms-database';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
-import { color } from '../../theme/color';
+import { color } from '../../../theme/color';
 import { useNavigation } from '@react-navigation/native';
 
 export type Form = {
