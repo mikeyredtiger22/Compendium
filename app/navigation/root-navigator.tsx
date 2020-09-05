@@ -19,6 +19,7 @@ import { GridScreen } from '../screens/grid-screen';
 import { FormScreen } from '../fragments/forms/form-screen';
 import { MapScreen } from '../fragments/maps/map-screen';
 import { WebsiteScreen } from '../screens/website-screen';
+import { FormDemoScreen } from '../screens/form-demo-screen';
 
 const Stack = createStackNavigator();
 
@@ -52,6 +53,11 @@ const RootStackNavigator = () => {
         name={'Form'}
         component={FormScreen}
         options={{ title: i18n.t('formScreen.header') }}
+      />
+      <Stack.Screen
+        name={'FormDemo'}
+        component={FormDemoScreen}
+        options={{ title: i18n.t('formDemoScreen.header') }}
       />
       <Stack.Screen
         name={'Map'}

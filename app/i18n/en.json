@@ -1,7 +1,7 @@
 {
   "introContentScreen": {
     "header": "Compendium",
-    "title": "Why does every business need a mobile app?",
+    "title": "Welcome to Compendium",
     "faqs": "FAQs about this app",
     "openApps": "See all example apps"
   },
@@ -13,15 +13,18 @@
     "website": "Website"
   },
   "formScreen": {
-    "header": "Form Header",
+    "header": "Forms",
     "title": "Form title"
+  },
+  "formDemoScreen": {
+    "header": "Form Header",
+    "title": "Create a new form or see, edit or delete all previous forms"
   },
   "mapScreen": {
     "header": "Map Header",
     "title": "Map title"
   },
   "websiteScreen": {
-    "header": "Website Header",
-    "title": "Website title"
+    "header": "View a website in-app"
   }
 }

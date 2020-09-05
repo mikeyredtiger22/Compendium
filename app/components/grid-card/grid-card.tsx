@@ -15,23 +15,25 @@ import { useNavigation } from '@react-navigation/native';
 
 export interface GridCardProps {
   title: string;
-  screenNavigationName: string;
+  screenNavigationName?: string;
   index: number;
 }
 
 export function GridCard(props: GridCardProps) {
-  const { title } = props;
+  const { title, screenNavigationName, index } = props;
   const uri = getMockImageUrl({
     width: 370,
     height: 370,
-    index: props.index,
+    index: index,
   });
   const navigation = useNavigation();
   return (
     <Button
       preset={'blank'}
       style={styles.ROOT}
-      onPress={() => navigation.navigate(props.screenNavigationName)}
+      onPress={() =>
+        screenNavigationName && navigation.navigate(screenNavigationName)
+      }
     >
       <ImageBackground
         source={{ uri }}

@@ -9,10 +9,21 @@ import i18n from 'i18n-js';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-const mockGridData: Array<{ title: string; screenNavigationName: string }> = [
-  { title: i18n.t('gridScreen.form'), screenNavigationName: 'Form' },
-  { title: i18n.t('gridScreen.map'), screenNavigationName: 'Map' },
+const mockGridData: Array<{ title: string; screenNavigationName?: string }> = [
+  { title: i18n.t('gridScreen.form'), screenNavigationName: 'FormDemo' },
   { title: i18n.t('gridScreen.website'), screenNavigationName: 'Website' },
+  { title: i18n.t('gridScreen.map'), screenNavigationName: 'Map' },
+  { title: 'eCommerce' },
+  { title: 'Takeaway' },
+  { title: 'Takeaway' },
+  { title: 'Booking' },
+  { title: 'Hotel' },
+  { title: 'Restaurant' },
+  { title: 'Gym' },
+  { title: 'Events / Venue' },
+  { title: 'Blog / News' },
+  { title: 'Job Board' },
+  { title: 'Real Estate' },
 ];
 
 export const GridScreen: Component = observer(function GridScreen() {
@@ -20,7 +31,6 @@ export const GridScreen: Component = observer(function GridScreen() {
     <Screen preset='scroll'>
       <Text preset='screenTitle' tx='gridScreen.title' />
       <FlatGrid
-        pointerEvents={'none'}
         scrollEnabled={false}
         fixed={true}
         spacing={GRID_SPACING}

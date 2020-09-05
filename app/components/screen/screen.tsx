@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   View,
@@ -25,7 +26,9 @@ function ScreenWithoutScrolling(props: ScreenProps) {
       keyboardVerticalOffset={offsets[props.keyboardOffset || 'none']}
     >
       <StatusBar barStyle={props.statusBar || 'light-content'} />
-      <View style={[preset.inner, style]}>{props.children}</View>
+      <SafeAreaView style={[preset.inner, style]}>
+        {props.children}
+      </SafeAreaView>
     </KeyboardAvoidingView>
   );
 }
@@ -49,7 +52,7 @@ function ScreenWithScrolling(props: ScreenProps) {
           style={[preset.outer, backgroundStyle]}
           contentContainerStyle={[preset.inner, style]}
         >
-          {props.children}
+          <SafeAreaView>{props.children}</SafeAreaView>
         </ScrollView>
       </View>
     </KeyboardAvoidingView>

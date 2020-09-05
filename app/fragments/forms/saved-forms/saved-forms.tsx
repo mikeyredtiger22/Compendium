@@ -45,7 +45,11 @@ export function SavedForms() {
   const formIds = forms ? Object.keys(forms) : [];
   return (
     <>
-      <Text preset={'screenTitle'}>Saved Forms</Text>
+      <Text preset={'screenSubtitle'}>Saved Forms</Text>
+      {formIds &&
+        formIds.map(formId => {
+          return <FormRow key={formId} formId={formId} form={forms[formId]} />;
+        })}
       {formIds &&
         formIds.map(formId => {
           return <FormRow key={formId} formId={formId} form={forms[formId]} />;
@@ -103,14 +107,15 @@ const FORM_ROW_CONTAINER: ViewStyle = {
   backgroundColor: 'white',
   alignItems: 'center',
   flexDirection: 'row',
-  margin: 8,
+  marginHorizontal: 10,
+  marginVertical: 5,
   borderWidth: 1,
   borderRadius: 8,
   borderColor: color.palette.lightGrey,
   shadowColor: 'rgba(0, 0, 0, 0.15)',
   shadowOffset: { width: 0, height: 5 },
   shadowOpacity: 1,
-  shadowRadius: 8,
+  shadowRadius: 10,
 };
 const TEXT_CONTAINER: ViewStyle = {
   flexDirection: 'column',

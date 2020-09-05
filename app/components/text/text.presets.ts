@@ -36,6 +36,12 @@ export const presets = {
     paddingVertical: 10,
     paddingHorizontal: 20,
   } as TextStyle,
+  screenSubtitle: {
+    ...BASE,
+    fontSize: 22,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  } as TextStyle,
   underlineCta: {
     ...BASE,
     textAlign: 'center',
