@@ -1,24 +1,24 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import {
   Dimensions,
+  Image,
   ImageStyle,
   TextStyle,
   View,
   ViewStyle,
 } from 'react-native';
-import { spacing } from '../../theme/spacing';
-import { Button } from '../button/button';
-import { Text } from '../text/text';
-import { Article } from '../../models/article/article';
+import { spacing } from '../../../theme/spacing';
+import { Button } from '../../../components/button/button';
+import { Text } from '../../../components/text/text';
 import { useNavigation } from '@react-navigation/native';
-import { MockImage } from '../mock-image';
 import * as Icons from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
 import {
   listenToArticleFavourited,
   stopListenToArticleFavourited,
   toggleFavouriteArticle,
-} from '../../services/database/articles';
+} from '../../../services/database/articles';
+import { Article } from '../articleData';
 
 export interface ContentCardProps {
   item: Article;
@@ -61,11 +61,17 @@ export function ContentCard(props: ContentCardProps) {
     navigation.navigate('ArticleDetail', { item, index });
 
   const [favourited, setFavourited] = useState<boolean | null>(null);
-  setupArticleFavouriting(props.item.id, favourited, setFavourited);
+  setupArticleFavouriting(item.title, favourited, setFavourited);
 
   return (
     <Button preset={'blank'} style={styles.ROOT} onPress={openArticle}>
-      <MockImage width={588} height={200} index={index} style={styles.IMAGE} />
+      {/* <MockImage width={588} height={200} index={index} style={styles.IMAGE} /> */}
+      <Image
+        width={588}
+        height={200}
+        source={{ uri: item.imageUrl }}
+        style={styles.IMAGE}
+      />
       <View style={styles.TEXT_CONTAINER}>
         <View style={styles.TOP_ROW_CONTAINER}>
           <Text
@@ -83,7 +89,7 @@ export function ContentCard(props: ContentCardProps) {
               name={favourited ? 'heart' : 'hearto'}
               size={20}
               color={'red'}
-              onPress={() => toggleFavouriteArticle(item.id)}
+              onPress={() => toggleFavouriteArticle(item.title)}
             />
           )}
         </View>

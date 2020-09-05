@@ -40,7 +40,7 @@ const RootStackNavigator = () => {
       <Stack.Screen
         name='IntroContent'
         component={IntroContentScreen}
-        options={{ title: i18n.t('intoContentScreen.header') }}
+        options={{ title: i18n.t('introContentScreen.header') }}
       />
       <Stack.Screen name={'ArticleDetail'} component={ArticleDetailScreen} />
       <Stack.Screen

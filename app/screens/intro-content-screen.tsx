@@ -2,22 +2,20 @@ import React, { FunctionComponent as Component } from 'react';
 import { observer } from 'mobx-react-lite';
 import { View, ViewStyle } from 'react-native';
 import { Text } from '../components/text/text';
-import { useStores } from '../models';
-import { Article } from '../models/article/article';
 import { Screen } from '../components/screen/screen';
-import { Carousel } from '../components/carousel/carousel';
+import { Carousel } from '../fragments/articles/carousel/carousel';
 import { Button } from '../components/button/button';
 import { useNavigation } from '@react-navigation/native';
+import { articleData } from '../fragments/articles/articleData';
 
 export const IntroContentScreen: Component = observer(function ContentScreen() {
-  const { articles }: { articles: Array<Article> } = useStores();
   const navigation = useNavigation();
 
   return (
     <Screen preset='fixed'>
       <Text preset='screenTitle' tx={'introContentScreen.title'} />
       <View style={CAROUSEL_CONTAINER}>
-        <Carousel data={articles} />
+        <Carousel data={articleData} />
       </View>
       <Button preset={'blank'}>
         <Text tx={'introContentScreen.faqs'} preset={'underlineCta'} />

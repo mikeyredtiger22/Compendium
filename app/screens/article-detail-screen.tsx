@@ -1,15 +1,15 @@
 import React, { FunctionComponent as Component, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { ImageStyle, TextStyle, View, ViewStyle } from 'react-native';
-import { Article } from '../models/article/article';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ScreenNavigationParameters } from '../navigation/tabs-navigator';
 import { MockImage } from '../components/mock-image';
 import * as Icons from '@expo/vector-icons';
 import { toggleFavouriteArticle } from '../services/database/articles';
-import { setupArticleFavouriting } from '../components/content-card/content-card';
+import { setupArticleFavouriting } from '../fragments/articles/content-card/content-card';
 import { Screen } from '../components/screen/screen';
 import { Text } from '../components/text/text';
+import { Article } from '../fragments/articles/articleData';
 
 type Props = StackScreenProps<ScreenNavigationParameters, 'ArticleDetail'>;
 
@@ -21,7 +21,7 @@ export const ArticleDetailScreen: Component = observer(
     }: { item: Article; index?: number } = props.route.params;
 
     const [favourited, setFavourited] = useState<boolean | null>(null);
-    setupArticleFavouriting(item.id, favourited, setFavourited);
+    setupArticleFavouriting(item.title, favourited, setFavourited);
 
     return (
       <Screen preset='scroll'>
@@ -35,7 +35,7 @@ export const ArticleDetailScreen: Component = observer(
               name={favourited ? 'heart' : 'hearto'}
               size={35}
               color={'red'}
-              onPress={() => toggleFavouriteArticle(item.id)}
+              onPress={() => toggleFavouriteArticle(item.title)}
             />
           )}
         </View>

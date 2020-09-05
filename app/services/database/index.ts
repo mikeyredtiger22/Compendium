@@ -1,6 +1,10 @@
 import * as firebase from 'firebase';
 import { firebaseConfig } from '../database-config';
 
+let initialised = false;
 export function setupDatabase() {
-  firebase.initializeApp(firebaseConfig);
+  if (!initialised) {
+    firebase.initializeApp(firebaseConfig);
+    initialised = true;
+  }
 }

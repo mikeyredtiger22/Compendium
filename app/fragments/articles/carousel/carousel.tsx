@@ -3,9 +3,9 @@ import { Dimensions, ViewStyle } from 'react-native';
 import { ContentCard } from '../content-card/content-card';
 import * as SnapCarousel from 'react-native-snap-carousel';
 import { useObserver } from 'mobx-react-lite';
-import { Article } from '../../models/article/article';
-import { color } from '../../theme/color';
+import { color } from '../../../theme/color';
 import { AdditionalParallaxProps } from 'react-native-snap-carousel';
+import { Article } from '../articleData';
 
 export interface CarouselProps {
   data: ReadonlyArray<Article>;
