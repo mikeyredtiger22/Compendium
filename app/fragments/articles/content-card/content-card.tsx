@@ -22,7 +22,6 @@ import { Article } from '../articleData';
 
 export interface ContentCardProps {
   item: Article;
-  index: number;
 }
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -55,10 +54,9 @@ export const setupArticleFavouriting = (
  * Component description here for TypeScript tips.
  */
 export function ContentCard(props: ContentCardProps) {
-  const { item, index } = props;
+  const { item } = props;
   const navigation = useNavigation();
-  const openArticle = () =>
-    navigation.navigate('ArticleDetail', { item, index });
+  const openArticle = () => navigation.navigate('ArticleDetail', props);
 
   const [favourited, setFavourited] = useState<boolean | null>(null);
   setupArticleFavouriting(item.title, favourited, setFavourited);

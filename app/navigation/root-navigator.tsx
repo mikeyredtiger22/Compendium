@@ -14,10 +14,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { color } from '../theme/color';
 import { IntroContentScreen } from '../screens/intro-content-screen';
 import { typography } from '../theme/typography';
-import { ArticleDetailScreen } from '../screens/article-detail-screen';
+import { ArticleDetailScreen } from '../fragments/articles/article-detail-screen';
 import { GridScreen } from '../screens/grid-screen';
 import { FormScreen } from '../fragments/forms/form-screen';
-import { MapScreen } from '../screens/map-screen';
+import { MapScreen } from '../fragments/maps/map-screen';
 import { WebsiteScreen } from '../screens/website-screen';
 
 const Stack = createStackNavigator();

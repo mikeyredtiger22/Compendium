@@ -11,11 +11,10 @@ storiesOf('ContentCard', module)
     <Story>
       <UseCase text='Primary' usage='The primary.'>
         <ContentCard
-          index={0}
           item={{
             title: 'Mock title',
             content: 'Mock content',
-            image:
+            imageUrl:
               'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=800',
           }}
         />
