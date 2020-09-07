@@ -91,7 +91,9 @@ export function ContentCard(props: ContentCardProps) {
             />
           )}
         </View>
-        <Text preset={'thin'}>{item.content}</Text>
+        <Text preset={'thin'} numberOfLines={2}>
+          {item.content}
+        </Text>
       </View>
     </Button>
   );

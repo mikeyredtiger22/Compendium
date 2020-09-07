@@ -20,6 +20,9 @@
     "header": "Form Header",
     "title": "Create a new form or see, edit or delete all previous forms"
   },
+  "articleDetailScreen": {
+    "header": ""
+  },
   "mapScreen": {
     "header": "Map Header",
     "title": "Map title"

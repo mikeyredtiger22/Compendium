@@ -15,7 +15,6 @@ const mockGridData: Array<{ title: string; screenNavigationName?: string }> = [
   { title: i18n.t('gridScreen.map'), screenNavigationName: 'Map' },
   { title: 'eCommerce' },
   { title: 'Takeaway' },
-  { title: 'Takeaway' },
   { title: 'Booking' },
   { title: 'Hotel' },
   { title: 'Restaurant' },
@@ -37,7 +36,7 @@ export const GridScreen: Component = observer(function GridScreen() {
         itemDimension={Math.floor(screenWidth / 2 - 1.5 * GRID_SPACING)}
         data={mockGridData}
         renderItem={({ item, index }) => <GridCard {...item} index={index} />}
-        keyExtractor={item => item.screenNavigationName}
+        keyExtractor={item => item.title}
       />
     </Screen>
   );

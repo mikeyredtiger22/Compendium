@@ -43,7 +43,11 @@ const RootStackNavigator = () => {
         component={IntroContentScreen}
         options={{ title: i18n.t('introContentScreen.header') }}
       />
-      <Stack.Screen name={'ArticleDetail'} component={ArticleDetailScreen} />
+      <Stack.Screen
+        name={'ArticleDetail'}
+        component={ArticleDetailScreen}
+        options={{ title: i18n.t('articleDetailScreen.header') }}
+      />
       <Stack.Screen
         name={'Grid'}
         component={GridScreen}
