@@ -1,20 +1,16 @@
 # Compendium
 
+### Adding a new screen
+1. Duplicate another screen in the `/screens` directory.
+
+2. App the screen to the Root Stack Navigation object in `navigation/root-navigator.tsx`.
+
+3. Add screen header, title and other readable text to `i18n/en.json`.
+
+## Ignite Bowser Starter Pack
+This app uses the Ignite Bowser starter pack. See all starter pack documentation below:
+
 [![CircleCI](https://circleci.com/gh/infinitered/ignite-bowser.svg?style=svg)](https://circleci.com/gh/infinitered/ignite-bowser)
-
-## The latest and greatest boilerplate for Infinite Red opinions
-
-This is the boilerplate that [Infinite Red](https://infinite.red) uses as a way to test bleeding-edge changes to our React Native stack.
-
-Currently includes:
-
-- React Native
-- React Navigation
-- MobX State Tree
-- TypeScript
-- And more!
-
-## Quick Start
 
 The Ignite Bowser boilerplate project's structure will look similar to this:
 
@@ -132,11 +128,6 @@ This starts up the storybook server.
 In `index.js`, change `SHOW_STORYBOOK` to `true` and reload the app.
 
 For Visual Studio Code users, there is a handy extension that makes it easy to load Storybook use cases into a running emulator via tapping on items in the editor sidebar. Install the `React Native Storybook` extension by `Orta`, hit `cmd + shift + P` and select "Reconnect Storybook to VSCode". Expand the STORYBOOK section in the sidebar to see all use cases for components that have `.story.tsx` files in their directories.
-
-## Previous Boilerplates
-
-- [2017 aka Andross](https://github.com/infinitered/ignite-andross)
-- [2016 aka Ignite 1.0](https://github.com/infinitered/ignite-ir-boilerplate-2016)
 
 ## Premium Support
 

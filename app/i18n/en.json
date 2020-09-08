@@ -29,5 +29,9 @@
   },
   "websiteScreen": {
     "header": "View a website in-app"
+  },
+  "faqsScreen": {
+    "header": "FAQs",
+    "title": "Click on an FAQ to see the answer"
   }
 }

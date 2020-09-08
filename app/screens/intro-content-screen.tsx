@@ -17,7 +17,7 @@ export const IntroContentScreen: Component = observer(function ContentScreen() {
       <View style={CAROUSEL_CONTAINER}>
         <Carousel data={articleData} />
       </View>
-      <Button preset={'blank'}>
+      <Button preset={'blank'} onPress={() => navigation.navigate('Faqs')}>
         <Text tx={'introContentScreen.faqs'} preset={'underlineCta'} />
       </Button>
       <View style={APPS_BUTTON}>

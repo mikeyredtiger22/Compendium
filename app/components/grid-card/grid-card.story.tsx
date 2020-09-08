@@ -10,7 +10,7 @@ storiesOf('GridCard', module)
   .add('Style Presets', () => (
     <Story>
       <UseCase text='Primary' usage='The primary.'>
-        <GridCard title='GridCard' />
+        <GridCard title='GridCard' index={1} />
       </UseCase>
     </Story>
   ));

@@ -56,20 +56,12 @@ export const presets = {
     paddingBottom: spacing[1],
   } as TextStyle,
   thin: { ...BASE, fontFamily: typography.museo, fontSize: 15 } as TextStyle,
-  /**
-   * A bold version of the default text.
-   */
-  bold: { ...BASE, fontWeight: 'bold' } as TextStyle,
-
-  /**
-   * Field labels that appear on forms above the inputs.
-   */
-  fieldLabel: { ...BASE, fontSize: 13, color: color.dim } as TextStyle,
-
-  /**
-   * A smaller piece of secondard information.
-   */
-  secondary: { ...BASE, fontSize: 9, color: color.dim } as TextStyle,
+  bold: { ...BASE, fontFamily: typography.museoXThick } as TextStyle,
+  thickSubtitle: {
+    ...BASE,
+    fontFamily: typography.museoXThick,
+    fontSize: 20,
+  } as TextStyle,
 };
 
 /**
